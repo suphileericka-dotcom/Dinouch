@@ -33,7 +33,7 @@
 
                 <div class="mb-6 flex items-start justify-between gap-4">
                     <h2 id="titre-produit" class="font-headline text-3xl font-bold leading-tight">Produit</h2>
-                    <span id="prix-produit" class="font-headline text-2xl font-bold text-[#615e5c]">0 EUR</span>
+                    <span id="prix-produit" class="font-headline text-2xl font-bold text-[#615e5c]">0 FCF</span>
                 </div>
 
                 <p id="description-produit" class="mb-8 text-sm leading-6 text-[#6d6964]">
@@ -95,7 +95,7 @@
         function afficherProduit() {
             if (!produit) {
                 titreProduit.textContent = "Produit introuvable";
-                prixProduit.textContent = "0 EUR";
+                prixProduit.textContent = "0 FCF";
                 descriptionProduit.textContent = "Cet article n'est pas disponible.";
                 zoneTailles.innerHTML = "";
                 boutonPanier.disabled = true;

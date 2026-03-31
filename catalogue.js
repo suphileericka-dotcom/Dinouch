@@ -155,11 +155,9 @@
 
     function formaterPrix(prix) {
         return new Intl.NumberFormat("fr-FR", {
-            style: "currency",
-            currency: "EUR",
             minimumFractionDigits: 0,
             maximumFractionDigits: 0
-        }).format(Number(prix) || 0);
+        }).format(Number(prix) || 0) + " FCF";
     }
 
     function echapperTexte(valeur) {
