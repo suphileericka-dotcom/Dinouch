@@ -1,0 +1,44 @@
+:root {
+    --fond-dinouch: #fcf9f6;
+    --gris-fonce: #615e5c;
+    --brun-dinouch: #705b44;
+}
+
+body {
+    background-color: var(--fond-dinouch);
+    color: #32332f;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.font-headline {
+    font-family: 'Epilogue', sans-serif;
+}
+
+.font-body {
+    font-family: 'Inter', sans-serif;
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+.image-placeholder {
+    background: linear-gradient(180deg, #ebe5dd 0%, #ddd5ca 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(97, 94, 92, 0.7);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+}
+
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+}

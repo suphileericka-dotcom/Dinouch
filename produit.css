@@ -1,0 +1,77 @@
+/* --- Variables spécifiques au Produit --- */
+:root {
+    --fond-dinouch: #fcf9f6;
+    --primaire-dinouch: #615e5c;
+    --accent-brun: #705b44;
+    --outline: #e4e3dd;
+}
+
+body {
+    background-color: var(--fond-dinouch);
+    color: #32332f;
+    font-family: 'Inter', sans-serif;
+}
+
+.font-headline { font-family: 'Epilogue', sans-serif; }
+
+/* --- Zone Image --- */
+.product-image-container {
+    background-color: #f0eee9;
+    height: 45vh; /* Mobile */
+}
+
+@media (min-width: 1024px) {
+    .product-image-container { height: 100vh; }
+}
+
+.img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e4e3dd;
+    color: #9e9d9a;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+/* --- Sélecteur de Tailles --- */
+.size-btn {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--outline);
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.size-btn:hover { border-color: var(--primaire-dinouch); }
+.size-btn.active {
+    background-color: var(--accent-brun);
+    color: white;
+    border-color: var(--accent-brun);
+}
+
+/* --- Boutons d'achat --- */
+.btn-add-cart {
+    background-color: var(--primaire-dinouch);
+    color: white;
+    width: 100%;
+    padding: 16px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.btn-whatsapp {
+    background-color: #fadec0;
+    color: #624e38;
+    width: 100%;
+    padding: 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+}

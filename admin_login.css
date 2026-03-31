@@ -1,0 +1,118 @@
+:root {
+    --fond-dinouch: #fcf9f6;
+    --gris-dinouch: #615e5c;
+    --accent: #705b44;
+    --danger: #c2675d;
+}
+
+body {
+    background-color: var(--fond-dinouch);
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.login-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.font-headline { font-family: 'Epilogue', sans-serif; }
+
+.brand {
+    font-size: 2rem;
+    color: var(--gris-dinouch);
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.eyebrow {
+    font-size: 12px;
+    color: #9e9d9a;
+    margin-bottom: 2rem;
+    letter-spacing: 0.18em;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #9e9d9a;
+    margin-bottom: 8px;
+}
+
+.admin-input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #e4e3dd;
+    border-radius: 8px;
+    background: #fcf9f6;
+    font-size: 14px;
+}
+
+.admin-input:focus {
+    outline: 2px solid var(--gris-dinouch);
+    border-color: transparent;
+}
+
+.btn-login {
+    width: 100%;
+    background: var(--gris-dinouch);
+    color: white;
+    padding: 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-login:active { transform: scale(0.98); }
+
+.feedback {
+    min-height: 18px;
+    margin: -0.25rem 0 1rem;
+    font-size: 12px;
+}
+
+.feedback.error {
+    color: var(--danger);
+}
+
+.feedback.success {
+    color: var(--accent);
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.footnote {
+    margin-top: 1rem;
+    font-size: 10px;
+    color: #c6c3bd;
+}

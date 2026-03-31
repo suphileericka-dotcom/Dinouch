@@ -1,0 +1,101 @@
+/* --- Variables spécifiques au Panier --- */
+:root {
+    --fond-dinouch: #fcf9f6;
+    --brun-dinouch: #705b44;
+    --gris-dinouch: #615e5c;
+    --surface-low: #f0eee9;
+}
+
+body {
+    background-color: var(--fond-dinouch);
+    font-family: 'Inter', sans-serif;
+    color: #32332f;
+}
+
+.font-headline {
+    font-family: 'Epilogue', sans-serif;
+}
+
+/* --- Liste des articles --- */
+.cart-card {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.img-placeholder {
+    width: 80px;
+    height: 96px;
+    background-color: #e4e3dd;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9e9d9a;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+/* --- Formulaire de validation --- */
+.checkout-section {
+    background-color: var(--surface-low);
+    padding: 2rem;
+    border-radius: 16px;
+}
+
+.custom-input {
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 14px;
+    margin-top: 6px;
+    background: white;
+}
+
+.custom-input:focus {
+    outline: 2px solid var(--gris-dinouch);
+}
+
+/* --- Bouton d'action --- */
+.btn-submit-order {
+    width: 100%;
+    background-color: var(--gris-dinouch);
+    color: white;
+    padding: 18px;
+    border-radius: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+    transition: all 0.2s ease;
+}
+
+.btn-submit-order:hover {
+    background-color: #4a4846;
+    transform: translateY(-2px);
+}
+
+/* --- Nav Flottante Mobile --- */
+.mobile-nav-container {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 10px 24px;
+    border-radius: 50px;
+    display: flex;
+    gap: 25px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    z-index: 100;
+}

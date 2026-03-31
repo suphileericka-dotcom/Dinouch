@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="suggestion.css"/>
+    <title>DINOUCH | Suggestions</title>
+</head>
+<body class="font-body selection:bg-secondary-container">
+
+    <header class="fixed left-0 right-0 top-0 z-50 flex w-full items-center justify-between bg-[#fcf9f6] px-6 py-4">
+        <a href="index.html" class="rounded-full p-2 text-[#615e5c] hover:bg-gray-100">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </a>
+        <h1 class="font-headline text-2xl font-black italic text-[#615e5c]">DINOUCH</h1>
+        <a href="admin.html" class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-[#615e5c]">
+            <span class="material-symbols-outlined text-base">person</span>
+        </a>
+    </header>
+
+    <main class="mx-auto min-h-screen max-w-2xl px-6 pb-32 pt-24">
+        <section class="mb-10 text-center">
+            <h2 class="font-headline mb-2 text-4xl font-black leading-tight tracking-tight text-[#32332f]">
+                Proposez vos <span class="italic text-[#705b44]">idees</span>
+            </h2>
+            <p class="mx-auto max-w-sm text-sm text-gray-500">
+                Aidez-nous a creer les prochaines pieces de la boutique DINOUCH.
+            </p>
+        </section>
+
+        <div class="space-y-6">
+            <div class="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                <form action="https://formspree.io/f/xaqljyjd" method="POST">
+                    <label class="font-headline mb-4 block text-xl font-bold">Decrivez votre idee</label>
+
+                    <textarea name="idee_description" class="w-full resize-none rounded-xl border-none bg-gray-50 p-4 text-sm transition-all focus:ring-1 focus:ring-[#705b44]" placeholder="Quel article aimeriez-vous voir arriver dans la boutique ?" rows="5" required></textarea>
+
+                    <div class="mt-6">
+                        <label class="mb-2 block text-[10px] font-bold uppercase tracking-widest text-gray-400">Votre contact (optionnel)</label>
+                        <input type="email" name="contact_client" class="w-full rounded-lg border-none bg-gray-50 p-3 text-sm" placeholder="votre@email.com">
+                    </div>
+
+                    <div class="mt-8">
+                        <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-xl bg-[#615e5c] py-4 font-headline font-bold uppercase tracking-widest text-white shadow-md transition-all hover:bg-[#555251]">
+                            Envoyer l'idee
+                            <span class="material-symbols-outlined text-lg">send</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="rounded-2xl bg-gray-100/50 p-6">
+                <h3 class="mb-4 text-center text-[10px] font-bold uppercase tracking-widest text-gray-400">Exemples d'inspirations</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined mt-0.5 text-xl text-[#705b44]">lightbulb</span>
+                        <div>
+                            <h4 class="text-sm font-bold text-[#32332f]">Ceramique artisanale</h4>
+                            <p class="text-xs text-gray-500">Pieces texturees, formes organiques et teintes naturelles.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined mt-0.5 text-xl text-[#705b44]">checkroom</span>
+                        <div>
+                            <h4 class="text-sm font-bold text-[#32332f]">Ligne en lin</h4>
+                            <p class="text-xs text-gray-500">Vetements souples, volumes confortables et matieres legeres.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <nav class="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 gap-10 rounded-full border border-white/20 bg-white/80 px-8 py-3 shadow-2xl backdrop-blur-lg">
+        <a href="index.html" class="text-gray-300"><span class="material-symbols-outlined">home</span></a>
+        <a href="suggestions.html" class="text-[#705b44]"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat</span></a>
+        <a href="panier.html" class="text-gray-300"><span class="material-symbols-outlined">shopping_bag</span></a>
+        <a href="admin.html" class="text-gray-300"><span class="material-symbols-outlined">person</span></a>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>DINOUCH | Boutique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css"/>
+    <script src="catalogue.js"></script>
+</head>
+<body class="font-body flex min-h-screen flex-col">
+
+    <header class="sticky top-0 z-50 flex items-center justify-between border-b border-black/5 bg-[#fcf9f6]/95 px-4 py-4 backdrop-blur">
+        <div>
+            <p class="text-[10px] uppercase tracking-[0.32em] text-[#9e9d9a]">Maison de creation</p>
+            <h1 class="font-headline text-2xl font-black italic text-[#615e5c]">DINOUCH</h1>
+        </div>
+        <a href="panier.html" class="flex h-11 w-11 items-center justify-center rounded-full border border-black/5 bg-white text-[#615e5c] shadow-sm">
+            <span class="material-symbols-outlined">shopping_bag</span>
+        </a>
+    </header>
+
+    <main class="mx-auto flex w-full max-w-lg flex-1 flex-col px-4 py-6 pb-32">
+        <section class="mb-8">
+            <p class="text-[10px] uppercase tracking-[0.35em] text-[#9e9d9a]">Collection en ligne</p>
+            <h2 class="font-headline mt-2 text-4xl font-black uppercase text-[#32332f]">La boutique</h2>
+            <p class="mt-3 max-w-sm text-sm text-[#77736e]">
+                Ouvrez un article pour le consulter, faire monter ses vues et l'ajouter a votre panier.
+            </p>
+        </section>
+
+        <div id="grille-produits" class="grid grid-cols-2 gap-x-3 gap-y-8"></div>
+
+        <div id="navigation-pages" class="mt-10 hidden items-center justify-between gap-3 rounded-2xl border border-black/5 bg-white px-4 py-3 shadow-sm">
+            <button id="bouton-precedent" type="button" class="rounded-full border border-black/5 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#615e5c] transition hover:bg-[#f5efe9]">
+                Precedent
+            </button>
+            <p id="indicateur-page" class="text-xs font-bold uppercase tracking-[0.2em] text-[#8d8882]"></p>
+            <button id="bouton-suivant" type="button" class="rounded-full border border-black/5 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#615e5c] transition hover:bg-[#f5efe9]">
+                Suivant
+            </button>
+        </div>
+    </main>
+
+    <nav class="fixed bottom-4 left-1/2 z-50 -translate-x-1/2">
+        <div class="flex gap-6 rounded-full border border-black/5 bg-white/85 px-6 py-3 shadow-2xl backdrop-blur-xl">
+            <a href="index.html" class="text-[#705b44]"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span></a>
+            <a href="suggestions.html" class="text-gray-400"><span class="material-symbols-outlined">chat</span></a>
+            <a href="panier.html" class="text-gray-400"><span class="material-symbols-outlined">shopping_bag</span></a>
+            <a href="admin.html" class="text-gray-400"><span class="material-symbols-outlined">person</span></a>
+        </div>
+    </nav>
+
+    <script>
+        window.DINOUCH.initialiserCatalogue();
+
+        const grilleProduits = document.getElementById("grille-produits");
+        const navigationPages = document.getElementById("navigation-pages");
+        const boutonPrecedent = document.getElementById("bouton-precedent");
+        const boutonSuivant = document.getElementById("bouton-suivant");
+        const indicateurPage = document.getElementById("indicateur-page");
+        let pageCourante = 1;
+
+        function creerCarteProduit(produit) {
+            const image = produit.image
+                ? '<img src="' + window.DINOUCH.echapperTexte(produit.image) + '" alt="' + window.DINOUCH.echapperTexte(produit.nom) + '" class="h-full w-full object-cover">'
+                : "<span>PHOTO</span>";
+
+            return `
+                <article class="product-card group">
+                    <a href="produit.html?id=${window.DINOUCH.echapperTexte(produit.id)}" class="block">
+                        <div class="relative aspect-[4/5] overflow-hidden rounded-2xl image-placeholder">
+                            ${image}
+                            <div class="absolute right-2 top-2 flex gap-1">
+                                <span class="rounded-full bg-white/90 px-2 py-1 text-[8px] font-bold">
+                                    ${window.DINOUCH.echapperTexte(produit.tailles.join(", "))}
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="mt-3">
+                        <a href="produit.html?id=${window.DINOUCH.echapperTexte(produit.id)}" class="block">
+                            <h3 class="truncate text-sm font-bold text-[#32332f]">${window.DINOUCH.echapperTexte(produit.nom)}</h3>
+                        </a>
+                        <div class="mt-1 flex items-center justify-between">
+                            <span class="text-sm font-black text-[#615e5c]">${window.DINOUCH.formaterPrix(produit.prix)}</span>
+                            <div class="flex items-center gap-1 text-[10px] text-[#9e9d9a]">
+                                <span class="material-symbols-outlined text-sm">visibility</span>${Number(produit.vues) || 0}
+                            </div>
+                        </div>
+                        <button data-produit-id="${window.DINOUCH.echapperTexte(produit.id)}" class="mt-3 w-full rounded-2xl bg-[#615e5c] py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white transition hover:bg-[#705b44]">
+                            Ajouter au panier
+                        </button>
+                    </div>
+                </article>
+            `;
+        }
+
+        function afficherProduits() {
+            const catalogue = window.DINOUCH.lireCatalogue();
+            const totalPages = Math.max(1, Math.ceil(catalogue.length / window.DINOUCH.PRODUITS_PAR_PAGE));
+            pageCourante = Math.min(pageCourante, totalPages);
+
+            const debut = (pageCourante - 1) * window.DINOUCH.PRODUITS_PAR_PAGE;
+            const produitsVisibles = catalogue.slice(debut, debut + window.DINOUCH.PRODUITS_PAR_PAGE);
+
+            if (!produitsVisibles.length) {
+                grilleProduits.innerHTML = '<div class="col-span-2 rounded-2xl border border-black/5 bg-white p-6 text-sm text-[#8d8882]">Aucun produit n\'est disponible pour le moment.</div>';
+            } else {
+                grilleProduits.innerHTML = produitsVisibles.map(creerCarteProduit).join("");
+            }
+
+            if (totalPages > 1) {
+                navigationPages.classList.remove("hidden");
+                navigationPages.classList.add("flex");
+                indicateurPage.textContent = "Page " + pageCourante + " sur " + totalPages;
+                boutonPrecedent.disabled = pageCourante === 1;
+                boutonSuivant.disabled = pageCourante === totalPages;
+                boutonPrecedent.classList.toggle("opacity-40", pageCourante === 1);
+                boutonSuivant.classList.toggle("opacity-40", pageCourante === totalPages);
+            } else {
+                navigationPages.classList.add("hidden");
+                navigationPages.classList.remove("flex");
+            }
+        }
+
+        grilleProduits.addEventListener("click", (evenement) => {
+            const bouton = evenement.target.closest("[data-produit-id]");
+            if (!bouton) {
+                return;
+            }
+
+            const idProduit = bouton.dataset.produitId;
+            window.DINOUCH.ajouterAuPanier(idProduit);
+
+            const texteInitial = bouton.textContent;
+            bouton.textContent = "Ajoute";
+            bouton.style.backgroundColor = "#705b44";
+
+            window.setTimeout(() => {
+                bouton.textContent = texteInitial;
+                bouton.style.backgroundColor = "#615e5c";
+            }, 1500);
+        });
+
+        boutonPrecedent.addEventListener("click", () => {
+            if (pageCourante > 1) {
+                pageCourante -= 1;
+                afficherProduits();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        });
+
+        boutonSuivant.addEventListener("click", () => {
+            const totalPages = Math.max(1, Math.ceil(window.DINOUCH.lireCatalogue().length / window.DINOUCH.PRODUITS_PAR_PAGE));
+            if (pageCourante < totalPages) {
+                pageCourante += 1;
+                afficherProduits();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        });
+
+        afficherProduits();
+    </script>
+</body>
+</html>

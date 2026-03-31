@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>DINOUCH | Produit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="produit.css"/>
+    <script src="catalogue.js"></script>
+</head>
+<body class="flex h-screen flex-col overflow-hidden">
+
+    <header class="shrink-0 border-b border-gray-100 bg-[#fcf9f6] px-6 py-3">
+        <div class="flex items-center justify-between">
+            <a href="index.html" class="material-symbols-outlined cursor-pointer text-[#615e5c]">arrow_back</a>
+            <h1 class="font-headline text-2xl font-black italic text-[#615e5c]">DINOUCH</h1>
+            <a href="panier.html" class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-[#615e5c]">
+                <span class="material-symbols-outlined text-base">shopping_bag</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="flex flex-1 flex-col overflow-hidden lg:flex-row">
+        <div class="product-image-container lg:w-1/2">
+            <div id="zone-image" class="img-placeholder">PHOTO</div>
+        </div>
+
+        <div class="flex flex-col justify-between overflow-y-auto bg-white p-6 lg:w-1/2">
+            <div>
+                <span id="texte-vues" class="mb-2 block text-[10px] font-bold uppercase tracking-widest text-[#705b44]">0 vues uniques</span>
+
+                <div class="mb-6 flex items-start justify-between gap-4">
+                    <h2 id="titre-produit" class="font-headline text-3xl font-bold leading-tight">Produit</h2>
+                    <span id="prix-produit" class="font-headline text-2xl font-bold text-[#615e5c]">0 EUR</span>
+                </div>
+
+                <p id="description-produit" class="mb-8 text-sm leading-6 text-[#6d6964]">
+                    Une piece selectionnee pour la boutique DINOUCH.
+                </p>
+
+                <section class="mb-8">
+                    <div class="mb-3 flex items-center justify-between">
+                        <label class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Choisir une taille</label>
+                        <span class="text-[10px] uppercase text-[#8d8882]">Article consultable</span>
+                    </div>
+                    <div id="zone-tailles" class="flex gap-2"></div>
+                </section>
+            </div>
+
+            <div class="space-y-3 pb-8">
+                <button id="bouton-panier" class="btn-add-cart transition-all hover:opacity-90 active:scale-[0.98]">
+                    Ajouter au panier
+                </button>
+                <a id="bouton-whatsapp" href="#" target="_blank" rel="noopener noreferrer" class="btn-whatsapp transition-all hover:bg-[#f4d4b3]">
+                    <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.284l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.768-5.764-5.768zm3.393 8.254c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.983-.36-1.725-.733-2.842-2.491-2.927-2.603-.085-.111-.692-.921-.692-1.756 0-.835.432-1.245.586-1.412.155-.167.337-.209.45-.209.112 0 .225.001.322.005.102.004.238-.039.373.287.136.327.465 1.132.505 1.214.04.082.067.177.013.285-.054.109-.081.177-.162.272-.081.095-.171.212-.244.285-.081.083-.167.173-.072.336.094.162.42 0.692.9 1.12.619.553 1.139.724 1.302.806.163.082.257.068.353-.04.095-.11.411-.479.52-.643.109-.164.218-.137.367-.082.15.055.945.446 1.108.528.163.082.272.123.313.191.04.068.04.394-.104.799z"></path>
+                    </svg>
+                    <span>Demander sur WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <nav class="flex items-center justify-around border-t border-gray-100 bg-white py-2 lg:hidden">
+        <a href="index.html" class="p-2 text-gray-400"><span class="material-symbols-outlined">home</span></a>
+        <a href="suggestions.html" class="p-2 text-gray-400"><span class="material-symbols-outlined">chat</span></a>
+        <a href="panier.html" class="rounded-full bg-[#705b44] p-2 text-white"><span class="material-symbols-outlined text-sm">shopping_bag</span></a>
+        <a href="admin.html" class="p-2 text-gray-400"><span class="material-symbols-outlined">person</span></a>
+    </nav>
+
+    <script>
+        window.DINOUCH.initialiserCatalogue();
+
+        const params = new URLSearchParams(window.location.search);
+        const idProduitDemande = params.get("id");
+        let produit = window.DINOUCH.trouverProduitParId(idProduitDemande) || window.DINOUCH.lireCatalogue()[0] || null;
+        let tailleSelectionnee = "Unique";
+
+        const zoneImage = document.getElementById("zone-image");
+        const texteVues = document.getElementById("texte-vues");
+        const titreProduit = document.getElementById("titre-produit");
+        const prixProduit = document.getElementById("prix-produit");
+        const descriptionProduit = document.getElementById("description-produit");
+        const zoneTailles = document.getElementById("zone-tailles");
+        const boutonPanier = document.getElementById("bouton-panier");
+        const boutonWhatsapp = document.getElementById("bouton-whatsapp");
+
+        if (produit) {
+            window.DINOUCH.incrementerVueUnique(produit.id);
+            produit = window.DINOUCH.trouverProduitParId(produit.id) || produit;
+        }
+
+        function afficherProduit() {
+            if (!produit) {
+                titreProduit.textContent = "Produit introuvable";
+                prixProduit.textContent = "0 EUR";
+                descriptionProduit.textContent = "Cet article n'est pas disponible.";
+                zoneTailles.innerHTML = "";
+                boutonPanier.disabled = true;
+                boutonPanier.classList.add("opacity-50", "cursor-not-allowed");
+                return;
+            }
+
+            if (produit.image) {
+                zoneImage.innerHTML = '<img src="' + window.DINOUCH.echapperTexte(produit.image) + '" alt="' + window.DINOUCH.echapperTexte(produit.nom) + '" class="h-full w-full object-cover">';
+            } else {
+                zoneImage.textContent = "PHOTO";
+            }
+
+            titreProduit.textContent = produit.nom;
+            prixProduit.textContent = window.DINOUCH.formaterPrix(produit.prix);
+            descriptionProduit.textContent = produit.description || "Une piece selectionnee pour la boutique DINOUCH.";
+            texteVues.textContent = (Number(produit.vues) || 0) + " vues uniques";
+
+            const tailles = Array.isArray(produit.tailles) && produit.tailles.length ? produit.tailles : ["Unique"];
+            tailleSelectionnee = tailles[0];
+
+            zoneTailles.innerHTML = tailles.map((taille, index) => {
+                const classeActive = index === 0 ? " active" : "";
+                return '<button type="button" class="size-btn' + classeActive + '" data-taille="' + window.DINOUCH.echapperTexte(taille) + '">' + window.DINOUCH.echapperTexte(taille) + "</button>";
+            }).join("");
+
+            const messageWhatsapp = encodeURIComponent("Bonjour, je souhaite des informations sur l'article " + produit.nom + ".");
+            boutonWhatsapp.href = "https://wa.me/?text=" + messageWhatsapp;
+        }
+
+        zoneTailles.addEventListener("click", (evenement) => {
+            const bouton = evenement.target.closest("[data-taille]");
+            if (!bouton) {
+                return;
+            }
+
+            zoneTailles.querySelectorAll("[data-taille]").forEach((element) => {
+                element.classList.remove("active");
+            });
+            bouton.classList.add("active");
+            tailleSelectionnee = bouton.dataset.taille;
+        });
+
+        boutonPanier.addEventListener("click", () => {
+            if (!produit) {
+                return;
+            }
+
+            window.DINOUCH.ajouterAuPanier(produit.id, tailleSelectionnee);
+            boutonPanier.textContent = "Ajoute";
+
+            window.setTimeout(() => {
+                boutonPanier.textContent = "Ajouter au panier";
+            }, 1500);
+        });
+
+        afficherProduit();
+    </script>
+</body>
+</html>

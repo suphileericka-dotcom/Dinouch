@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;900&family=Inter:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="admin_login.css"/>
+    <script src="catalogue.js"></script>
+    <title>DINOUCH | Connexion admin</title>
+</head>
+<body>
+
+    <div class="login-card">
+        <h1 class="font-headline brand">DINOUCH</h1>
+        <p class="eyebrow">ESPACE ADMINISTRATEUR</p>
+
+        <form id="formulaire-admin" novalidate>
+            <div class="input-group">
+                <label for="email-admin">Email administrateur</label>
+                <input id="email-admin" type="email" class="admin-input" placeholder="Entrez votre email" autocomplete="email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="mot-de-passe-admin">Mot de passe</label>
+                <input id="mot-de-passe-admin" type="password" class="admin-input" placeholder="Entrez votre mot de passe" autocomplete="current-password" required>
+            </div>
+
+            <p id="message-connexion" class="feedback" aria-live="polite"></p>
+            <button type="submit" class="btn-login">Se connecter</button>
+        </form>
+
+        <a href="index.html" class="back-link">Retour a la boutique</a>
+        <p class="footnote">Acces reserve a l'administration DINOUCH</p>
+    </div>
+
+    <script>
+        const MOT_DE_PASSE_ADMIN = "@16Dinou";
+
+        if (window.DINOUCH.sessionAdminActive()) {
+            window.location.replace("admin.html");
+        }
+
+        const formulaireAdmin = document.getElementById("formulaire-admin");
+        const emailAdmin = document.getElementById("email-admin");
+        const motDePasseAdmin = document.getElementById("mot-de-passe-admin");
+        const messageConnexion = document.getElementById("message-connexion");
+
+        formulaireAdmin.addEventListener("submit", (evenement) => {
+            evenement.preventDefault();
+
+            if (!emailAdmin.value.trim()) {
+                messageConnexion.textContent = "Renseignez votre email administrateur.";
+                messageConnexion.className = "feedback error";
+                emailAdmin.focus();
+                return;
+            }
+
+            if (motDePasseAdmin.value !== MOT_DE_PASSE_ADMIN) {
+                messageConnexion.textContent = "Mot de passe incorrect.";
+                messageConnexion.className = "feedback error";
+                motDePasseAdmin.focus();
+                motDePasseAdmin.select();
+                return;
+            }
+
+            window.DINOUCH.ouvrirSessionAdmin();
+            messageConnexion.textContent = "Connexion reussie. Redirection...";
+            messageConnexion.className = "feedback success";
+
+            window.setTimeout(() => {
+                window.location.replace("admin.html");
+            }, 250);
+        });
+    </script>
+</body>
+</html>
