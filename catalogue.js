@@ -153,6 +153,19 @@
         return produitNormalise;
     }
 
+    function retirerPhotoProduit(idProduit) {
+        const catalogue = lireCatalogue();
+        const index = catalogue.findIndex((produit) => produit.id === idProduit);
+
+        if (index === -1) {
+            return false;
+        }
+
+        catalogue[index].image = "";
+        enregistrerCatalogue(catalogue);
+        return true;
+    }
+
     function formaterPrix(prix) {
         return new Intl.NumberFormat("fr-FR", {
             minimumFractionDigits: 0,
@@ -246,6 +259,7 @@
         enregistrerCatalogue,
         trouverProduitParId,
         ajouterAuCatalogue,
+        retirerPhotoProduit,
         catalogueNeContientQueDesExemples,
         formaterPrix,
         echapperTexte,
