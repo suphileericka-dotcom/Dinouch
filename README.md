@@ -194,25 +194,25 @@ widgetCloudinary = cloudinary.createUploadWidget(
 
 Ensuite, l'URL de l'image est stockee dans le produit.
 
-### 7. Retirer une photo du site
+### 7. Supprimer un article depuis l'admin
 
-La suppression de photo cote site seulement passe maintenant par `catalogue.js` :
+La suppression d'un article depuis l'admin passe maintenant par `catalogue.js` :
 
 ```js
-function retirerPhotoProduit(idProduit) {
+function supprimerProduit(idProduit) {
     const catalogue = lireCatalogue();
     const index = catalogue.findIndex((produit) => produit.id === idProduit);
     if (index === -1) {
         return false;
     }
-    catalogue[index].image = "";
+    catalogue.splice(index, 1);
     enregistrerCatalogue(catalogue);
     return true;
 }
 ```
 
 Cela ne supprime pas le fichier de Cloudinary.
-Cela retire simplement l'image de l'interface du site.
+Cela retire l'article du catalogue du site.
 
 ## Fonctionnement page par page
 
@@ -221,7 +221,7 @@ Cela retire simplement l'image de l'interface du site.
 - ajoute un article
 - enregistre le produit
 - affiche les articles recents
-- permet de retirer une photo du site
+- permet de supprimer un article du site
 
 ### `index.html`
 
@@ -248,7 +248,7 @@ Cela retire simplement l'image de l'interface du site.
 - les donnees sont stockees dans `localStorage`
 - si on change d'appareil ou de navigateur, on ne retrouve pas les memes donnees
 - les vues ne sont pas centralisees sur un serveur
-- la suppression de photo retire l'image du site, pas de Cloudinary
+- la suppression d'un article retire le produit du site, pas le fichier Cloudinary
 
 ## Si tu veux faire evoluer le projet plus tard
 

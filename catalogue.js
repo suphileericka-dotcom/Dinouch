@@ -153,7 +153,7 @@
         return produitNormalise;
     }
 
-    function retirerPhotoProduit(idProduit) {
+    function supprimerProduit(idProduit) {
         const catalogue = lireCatalogue();
         const index = catalogue.findIndex((produit) => produit.id === idProduit);
 
@@ -161,8 +161,18 @@
             return false;
         }
 
-        catalogue[index].image = "";
+        catalogue.splice(index, 1);
         enregistrerCatalogue(catalogue);
+
+        const panierFiltre = lirePanier().filter((produit) => produit.id !== idProduit);
+        enregistrerPanier(panierFiltre);
+
+        const vuesUniques = lireJson(CLE_VUES_UNIQUES, {});
+        if (Object.prototype.hasOwnProperty.call(vuesUniques, idProduit)) {
+            delete vuesUniques[idProduit];
+            enregistrerJson(CLE_VUES_UNIQUES, vuesUniques);
+        }
+
         return true;
     }
 
@@ -259,7 +269,7 @@
         enregistrerCatalogue,
         trouverProduitParId,
         ajouterAuCatalogue,
-        retirerPhotoProduit,
+        supprimerProduit,
         catalogueNeContientQueDesExemples,
         formaterPrix,
         echapperTexte,

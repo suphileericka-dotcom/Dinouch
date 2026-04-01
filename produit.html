@@ -75,7 +75,9 @@
 
         const params = new URLSearchParams(window.location.search);
         const idProduitDemande = params.get("id");
-        let produit = window.DINOUCH.trouverProduitParId(idProduitDemande) || window.DINOUCH.lireCatalogue()[0] || null;
+        let produit = idProduitDemande
+            ? window.DINOUCH.trouverProduitParId(idProduitDemande)
+            : window.DINOUCH.lireCatalogue()[0] || null;
         let tailleSelectionnee = "Unique";
 
         const zoneImage = document.getElementById("zone-image");
@@ -97,9 +99,12 @@
                 titreProduit.textContent = "Produit introuvable";
                 prixProduit.textContent = "0 FCF";
                 descriptionProduit.textContent = "Cet article n'est pas disponible.";
+                texteVues.textContent = "0 vues uniques";
                 zoneTailles.innerHTML = "";
                 boutonPanier.disabled = true;
                 boutonPanier.classList.add("opacity-50", "cursor-not-allowed");
+                boutonWhatsapp.href = "#";
+                boutonWhatsapp.classList.add("pointer-events-none", "opacity-50");
                 return;
             }
 
@@ -124,6 +129,7 @@
 
             const messageWhatsapp = encodeURIComponent("Bonjour, je souhaite des informations sur l'article " + produit.nom + ".");
             boutonWhatsapp.href = "https://wa.me/?text=" + messageWhatsapp;
+            boutonWhatsapp.classList.remove("pointer-events-none", "opacity-50");
         }
 
         zoneTailles.addEventListener("click", (evenement) => {
