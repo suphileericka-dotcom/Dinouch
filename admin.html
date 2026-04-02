@@ -25,20 +25,6 @@
             </div>
 
             <p id="statut-synchronisation" class="mb-6 rounded-2xl border border-black/5 bg-[#fcf9f6] px-4 py-3 text-xs leading-5 text-[#705b44]"></p>
-            <div id="aide-publication" class="mb-6 hidden rounded-2xl border border-amber-200 bg-amber-50 px-4 py-4 text-xs leading-5 text-[#705b44]">
-                <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-[#8d5f28]">Publication distante requise</p>
-                <p class="mt-2">
-                    L'image peut partir sur Cloudinary, mais l'article ne sera pas sauvegarde dans la boutique tant que <strong>GITHUB_TOKEN</strong> n'est pas ajoute sur Vercel.
-                </p>
-                <div class="mt-4 flex flex-wrap gap-2">
-                    <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer" class="rounded-full border border-[#d9b382] bg-white px-4 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[#8d5f28] transition hover:bg-[#fff8ef]">
-                        Creer le token GitHub
-                    </a>
-                    <a href="https://vercel.com/docs/environment-variables/managing-environment-variables" target="_blank" rel="noopener noreferrer" class="rounded-full border border-[#d9b382] bg-white px-4 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[#8d5f28] transition hover:bg-[#fff8ef]">
-                        Ajouter sur Vercel
-                    </a>
-                </div>
-            </div>
 
             <form id="formulaire-produit" class="flex flex-col gap-4">
                 <div>
@@ -127,7 +113,6 @@
         const listePhotos = document.getElementById("liste-photos");
         const compteurPhotos = document.getElementById("compteur-photos");
         const statutSynchronisation = document.getElementById("statut-synchronisation");
-        const aidePublication = document.getElementById("aide-publication");
         const boutonPublier = formulaireProduit.querySelector('button[type="submit"]');
 
         async function deconnexion() {
@@ -164,7 +149,6 @@
             boutonPublier.disabled = !publicationDisponible;
             boutonPublier.classList.toggle("opacity-50", !publicationDisponible);
             boutonPublier.classList.toggle("cursor-not-allowed", !publicationDisponible);
-            aidePublication.classList.toggle("hidden", publicationDisponible);
 
             listePhotos.querySelectorAll("[data-retirer-photo]").forEach((bouton) => {
                 bouton.disabled = !publicationDisponible;
