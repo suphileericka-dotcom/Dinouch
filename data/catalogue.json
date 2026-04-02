@@ -1,0 +1,42 @@
+[
+  {
+    "id": "vase-artisanal",
+    "nom": "Vase artisanal",
+    "prix": 85,
+    "image": "",
+    "tailles": ["Unique"],
+    "vues": 0,
+    "description": "Une piece decorative au style artisanal, ideale pour sublimer une table ou une console.",
+    "estExemple": true
+  },
+  {
+    "id": "chemise-lin-ample",
+    "nom": "Chemise en lin ample",
+    "prix": 145,
+    "image": "",
+    "tailles": ["S", "M", "L"],
+    "vues": 0,
+    "description": "Une chemise legere a la coupe ample, pensee pour un style simple et raffine.",
+    "estExemple": true
+  },
+  {
+    "id": "assiettes-mouchetees",
+    "nom": "Service d'assiettes mouchetees",
+    "prix": 120,
+    "image": "",
+    "tailles": ["6 pieces"],
+    "vues": 0,
+    "description": "Un ensemble de table artisanal au rendu mineral et chaleureux.",
+    "estExemple": true
+  },
+  {
+    "id": "veste-lin-signature",
+    "nom": "Veste en lin signature",
+    "prix": 165,
+    "image": "",
+    "tailles": ["M", "L"],
+    "vues": 0,
+    "description": "Une veste de caractere, facile a porter au quotidien avec une allure epuree.",
+    "estExemple": true
+  }
+]

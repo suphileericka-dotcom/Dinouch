@@ -5,8 +5,17 @@
     const ANCIENNE_CLE_PANIER = "monPanier";
     const CLE_SESSION_ADMIN = "dinouch_session_admin";
     const ANCIENNE_CLE_SESSION_ADMIN = "atelier_admin_session";
-    const CLE_VUES_UNIQUES = "dinouch_vues_uniques";
     const PRODUITS_PAR_PAGE = 15;
+
+    let catalogueEnMemoire = null;
+    let promesseInitialisation = null;
+    let statutStockage = {
+        shared: false,
+        writable: false,
+        storage: "local",
+        message: ""
+    };
+    let sessionAdminMemoire = null;
 
     function lireJson(cle, valeurParDefaut) {
         try {
@@ -100,11 +109,62 @@
         };
     }
 
-    function catalogueNeContientQueDesExemples(catalogue) {
-        return catalogue.length > 0 && catalogue.every((produit) => produit.estExemple);
+    function normaliserCatalogue(catalogue) {
+        if (!Array.isArray(catalogue)) {
+            return creerCatalogueParDefaut().map(normaliserProduit);
+        }
+
+        return catalogue.map(normaliserProduit);
     }
 
-    function initialiserCatalogue() {
+    function lireCatalogueLocal() {
+        const catalogue = lireJson(CLE_CATALOGUE, null);
+        if (!Array.isArray(catalogue)) {
+            return creerCatalogueParDefaut().map(normaliserProduit);
+        }
+
+        return catalogue.map(normaliserProduit);
+    }
+
+    function enregistrerCatalogueLocal(catalogue) {
+        const catalogueNormalise = normaliserCatalogue(catalogue);
+        catalogueEnMemoire = catalogueNormalise;
+        enregistrerJson(CLE_CATALOGUE, catalogueNormalise);
+        return catalogueNormalise;
+    }
+
+    function clonerCatalogue(catalogue) {
+        return normaliserCatalogue(catalogue).map((produit) => ({ ...produit, tailles: [...produit.tailles] }));
+    }
+
+    function mutationLocaleAutorisee() {
+        return window.location.protocol === "file:" || ["localhost", "127.0.0.1"].includes(window.location.hostname);
+    }
+
+    async function lireJsonApi(url, options) {
+        const reponse = await fetch(url, {
+            cache: "no-store",
+            credentials: "same-origin",
+            ...options
+        });
+
+        let donnees = {};
+        try {
+            donnees = await reponse.json();
+        } catch (erreur) {
+            donnees = {};
+        }
+
+        if (!reponse.ok) {
+            throw new Error(donnees.message || "Impossible de contacter le service distant.");
+        }
+
+        return donnees;
+    }
+
+    async function initialiserCatalogue(options) {
+        const force = Boolean(options && options.force);
+
         migrerSiBesoin(CLE_CATALOGUE, ANCIENNE_CLE_CATALOGUE);
         migrerSiBesoin(CLE_PANIER, ANCIENNE_CLE_PANIER);
 
@@ -112,68 +172,141 @@
             localStorage.setItem(CLE_SESSION_ADMIN, "active");
         }
 
-        const catalogueExistant = lireJson(CLE_CATALOGUE, null);
-        if (!Array.isArray(catalogueExistant) || catalogueExistant.length === 0) {
-            enregistrerJson(CLE_CATALOGUE, creerCatalogueParDefaut());
-            return;
+        if (!catalogueEnMemoire) {
+            catalogueEnMemoire = lireCatalogueLocal();
         }
 
-        const catalogueNormalise = catalogueExistant.map(normaliserProduit);
-        enregistrerJson(CLE_CATALOGUE, catalogueNormalise);
+        if (promesseInitialisation && !force) {
+            return promesseInitialisation;
+        }
+
+        promesseInitialisation = lireJsonApi("/api/catalogue")
+            .then((donnees) => {
+                statutStockage = {
+                    shared: Boolean(donnees.shared),
+                    writable: Boolean(donnees.writable),
+                    storage: String(donnees.storage || "remote"),
+                    message: String(donnees.message || "")
+                };
+                return enregistrerCatalogueLocal(donnees.catalogue || []);
+            })
+            .catch(() => {
+                statutStockage = {
+                    shared: false,
+                    writable: false,
+                    storage: "local",
+                    message: "Le catalogue partage n'est pas joignable. Les donnees locales restent affichees."
+                };
+                return enregistrerCatalogueLocal(catalogueEnMemoire || lireCatalogueLocal());
+            });
+
+        return promesseInitialisation;
     }
 
     function lireCatalogue() {
-        initialiserCatalogue();
-        return lireJson(CLE_CATALOGUE, []).map(normaliserProduit);
+        if (!catalogueEnMemoire) {
+            catalogueEnMemoire = lireCatalogueLocal();
+        }
+
+        return clonerCatalogue(catalogueEnMemoire);
     }
 
-    function enregistrerCatalogue(catalogue) {
-        enregistrerJson(CLE_CATALOGUE, catalogue.map(normaliserProduit));
+    function lireStatutStockage() {
+        return { ...statutStockage };
     }
 
     function trouverProduitParId(idProduit) {
         return lireCatalogue().find((produit) => produit.id === idProduit) || null;
     }
 
-    function ajouterAuCatalogue(produit) {
-        const catalogueActuel = lireCatalogue();
-        const baseCatalogue = catalogueNeContientQueDesExemples(catalogueActuel) ? [] : catalogueActuel;
-        const produitNormalise = normaliserProduit(
-            {
-                ...produit,
-                id: produit.id || "dinouch-" + Date.now(),
-                vues: Number(produit.vues) || 0,
-                estExemple: false
-            },
-            baseCatalogue.length
-        );
+    async function ajouterAuCatalogue(produit) {
+        await initialiserCatalogue();
 
-        baseCatalogue.unshift(produitNormalise);
-        enregistrerCatalogue(baseCatalogue);
-        return produitNormalise;
+        try {
+            const donnees = await lireJsonApi("/api/catalogue", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                body: JSON.stringify({
+                    action: "create",
+                    produit
+                })
+            });
+
+            statutStockage = {
+                shared: Boolean(donnees.shared),
+                writable: Boolean(donnees.writable),
+                storage: String(donnees.storage || "github"),
+                message: String(donnees.message || "")
+            };
+
+            enregistrerCatalogueLocal(donnees.catalogue || []);
+            return normaliserProduit(donnees.produit || produit, 0);
+        } catch (erreur) {
+            if (!mutationLocaleAutorisee()) {
+                throw erreur;
+            }
+
+            const catalogueActuel = lireCatalogue();
+            const produitNormalise = normaliserProduit({
+                ...produit,
+                id: produit.id || `dinouch-${Date.now()}`,
+                vues: 0,
+                estExemple: false
+            }, catalogueActuel.length);
+
+            catalogueActuel.unshift(produitNormalise);
+            enregistrerCatalogueLocal(catalogueActuel);
+            statutStockage = {
+                shared: false,
+                writable: true,
+                storage: "local",
+                message: "Publication locale uniquement."
+            };
+            return produitNormalise;
+        }
     }
 
-    function supprimerProduit(idProduit) {
-        const catalogue = lireCatalogue();
-        const index = catalogue.findIndex((produit) => produit.id === idProduit);
+    async function supprimerProduit(idProduit) {
+        await initialiserCatalogue();
 
-        if (index === -1) {
-            return false;
+        try {
+            const donnees = await lireJsonApi("/api/catalogue", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                body: JSON.stringify({
+                    action: "delete",
+                    idProduit
+                })
+            });
+
+            statutStockage = {
+                shared: Boolean(donnees.shared),
+                writable: Boolean(donnees.writable),
+                storage: String(donnees.storage || "github"),
+                message: String(donnees.message || "")
+            };
+
+            enregistrerCatalogueLocal(donnees.catalogue || []);
+            return true;
+        } catch (erreur) {
+            if (!mutationLocaleAutorisee()) {
+                throw erreur;
+            }
+
+            const catalogue = lireCatalogue();
+            const index = catalogue.findIndex((produit) => produit.id === idProduit);
+            if (index === -1) {
+                return false;
+            }
+
+            catalogue.splice(index, 1);
+            enregistrerCatalogueLocal(catalogue);
+            return true;
         }
-
-        catalogue.splice(index, 1);
-        enregistrerCatalogue(catalogue);
-
-        const panierFiltre = lirePanier().filter((produit) => produit.id !== idProduit);
-        enregistrerPanier(panierFiltre);
-
-        const vuesUniques = lireJson(CLE_VUES_UNIQUES, {});
-        if (Object.prototype.hasOwnProperty.call(vuesUniques, idProduit)) {
-            delete vuesUniques[idProduit];
-            enregistrerJson(CLE_VUES_UNIQUES, vuesUniques);
-        }
-
-        return true;
     }
 
     function formaterPrix(prix) {
@@ -194,7 +327,6 @@
     }
 
     function lirePanier() {
-        initialiserCatalogue();
         return lireJson(CLE_PANIER, []);
     }
 
@@ -231,46 +363,80 @@
         enregistrerPanier([]);
     }
 
-    function incrementerVueUnique(idProduit) {
-        const vuesUniques = lireJson(CLE_VUES_UNIQUES, {});
-        if (vuesUniques[idProduit]) {
-            return false;
+    async function verifierSessionAdmin(force) {
+        if (sessionAdminMemoire !== null && !force) {
+            return sessionAdminMemoire;
         }
 
-        const catalogue = lireCatalogue();
-        const index = catalogue.findIndex((produit) => produit.id === idProduit);
-        if (index === -1) {
-            return false;
+        try {
+            const donnees = await lireJsonApi("/api/admin-auth");
+            sessionAdminMemoire = Boolean(donnees.active);
+            if (sessionAdminMemoire) {
+                localStorage.setItem(CLE_SESSION_ADMIN, "active");
+            } else {
+                localStorage.removeItem(CLE_SESSION_ADMIN);
+            }
+            return sessionAdminMemoire;
+        } catch (erreur) {
+            sessionAdminMemoire = localStorage.getItem(CLE_SESSION_ADMIN) === "active";
+            return sessionAdminMemoire;
         }
+    }
 
-        catalogue[index].vues = (Number(catalogue[index].vues) || 0) + 1;
-        enregistrerCatalogue(catalogue);
-        vuesUniques[idProduit] = new Date().toISOString();
-        enregistrerJson(CLE_VUES_UNIQUES, vuesUniques);
+    async function ouvrirSessionAdmin(password) {
+        await fetch("/api/admin-auth", {
+            method: "POST",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8"
+            },
+            body: JSON.stringify({
+                password
+            })
+        }).then(async (reponse) => {
+            if (reponse.ok) {
+                return;
+            }
+
+            let donnees = {};
+            try {
+                donnees = await reponse.json();
+            } catch (erreur) {
+                donnees = {};
+            }
+
+            throw new Error(donnees.message || "Connexion administrateur impossible.");
+        });
+
+        sessionAdminMemoire = true;
+        localStorage.setItem(CLE_SESSION_ADMIN, "active");
         return true;
     }
 
+    async function fermerSessionAdmin() {
+        try {
+            await fetch("/api/admin-auth", {
+                method: "DELETE",
+                credentials: "same-origin"
+            });
+        } finally {
+            sessionAdminMemoire = false;
+            localStorage.removeItem(CLE_SESSION_ADMIN);
+        }
+    }
+
     function sessionAdminActive() {
-        return localStorage.getItem(CLE_SESSION_ADMIN) === "active";
-    }
-
-    function ouvrirSessionAdmin() {
-        localStorage.setItem(CLE_SESSION_ADMIN, "active");
-    }
-
-    function fermerSessionAdmin() {
-        localStorage.removeItem(CLE_SESSION_ADMIN);
+        return sessionAdminMemoire === true || localStorage.getItem(CLE_SESSION_ADMIN) === "active";
     }
 
     window.DINOUCH = {
         PRODUITS_PAR_PAGE,
         initialiserCatalogue,
         lireCatalogue,
-        enregistrerCatalogue,
+        lireStatutStockage,
         trouverProduitParId,
         ajouterAuCatalogue,
         supprimerProduit,
-        catalogueNeContientQueDesExemples,
         formaterPrix,
         echapperTexte,
         lirePanier,
@@ -278,7 +444,7 @@
         ajouterAuPanier,
         retirerDuPanier,
         viderPanier,
-        incrementerVueUnique,
+        verifierSessionAdmin,
         sessionAdminActive,
         ouvrirSessionAdmin,
         fermerSessionAdmin

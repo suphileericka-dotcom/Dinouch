@@ -27,7 +27,7 @@
             <p class="text-[10px] uppercase tracking-[0.35em] text-[#9e9d9a]">Collection en ligne</p>
             <h2 class="font-headline mt-2 text-4xl font-black uppercase text-[#32332f]">La boutique</h2>
             <p class="mt-3 max-w-sm text-sm text-[#77736e]">
-                Ouvrez un article pour le consulter, faire monter ses vues et l'ajouter a votre panier.
+                Ouvrez un article pour le consulter et l'ajouter a votre panier.
             </p>
         </section>
 
@@ -54,8 +54,6 @@
     </nav>
 
     <script>
-        window.DINOUCH.initialiserCatalogue();
-
         const grilleProduits = document.getElementById("grille-produits");
         const navigationPages = document.getElementById("navigation-pages");
         const boutonPrecedent = document.getElementById("bouton-precedent");
@@ -84,11 +82,8 @@
                         <a href="produit.html?id=${window.DINOUCH.echapperTexte(produit.id)}" class="block">
                             <h3 class="truncate text-sm font-bold text-[#32332f]">${window.DINOUCH.echapperTexte(produit.nom)}</h3>
                         </a>
-                        <div class="mt-1 flex items-center justify-between">
+                        <div class="mt-1">
                             <span class="text-sm font-black text-[#615e5c]">${window.DINOUCH.formaterPrix(produit.prix)}</span>
-                            <div class="flex items-center gap-1 text-[10px] text-[#9e9d9a]">
-                                <span class="material-symbols-outlined text-sm">visibility</span>${Number(produit.vues) || 0}
-                            </div>
                         </div>
                         <button data-produit-id="${window.DINOUCH.echapperTexte(produit.id)}" class="mt-3 w-full rounded-2xl bg-[#615e5c] py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white transition hover:bg-[#705b44]">
                             Ajouter au panier
@@ -162,7 +157,12 @@
             }
         });
 
-        afficherProduits();
+        async function demarrerBoutique() {
+            await window.DINOUCH.initialiserCatalogue();
+            afficherProduits();
+        }
+
+        demarrerBoutique();
     </script>
 </body>
 </html>

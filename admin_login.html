@@ -34,18 +34,19 @@
     </div>
 
     <script>
-        const MOT_DE_PASSE_ADMIN = "@16Dinou";
-
-        if (window.DINOUCH.sessionAdminActive()) {
-            window.location.replace("admin.html");
-        }
-
         const formulaireAdmin = document.getElementById("formulaire-admin");
         const emailAdmin = document.getElementById("email-admin");
         const motDePasseAdmin = document.getElementById("mot-de-passe-admin");
         const messageConnexion = document.getElementById("message-connexion");
 
-        formulaireAdmin.addEventListener("submit", (evenement) => {
+        async function verifierSessionExistante() {
+            const sessionActive = await window.DINOUCH.verifierSessionAdmin();
+            if (sessionActive) {
+                window.location.replace("admin.html");
+            }
+        }
+
+        formulaireAdmin.addEventListener("submit", async (evenement) => {
             evenement.preventDefault();
 
             if (!emailAdmin.value.trim()) {
@@ -55,22 +56,23 @@
                 return;
             }
 
-            if (motDePasseAdmin.value !== MOT_DE_PASSE_ADMIN) {
-                messageConnexion.textContent = "Mot de passe incorrect.";
+            try {
+                await window.DINOUCH.ouvrirSessionAdmin(motDePasseAdmin.value);
+                messageConnexion.textContent = "Connexion reussie. Redirection...";
+                messageConnexion.className = "feedback success";
+
+                window.setTimeout(() => {
+                    window.location.replace("admin.html");
+                }, 250);
+            } catch (erreur) {
+                messageConnexion.textContent = erreur.message || "Mot de passe incorrect.";
                 messageConnexion.className = "feedback error";
                 motDePasseAdmin.focus();
                 motDePasseAdmin.select();
-                return;
             }
-
-            window.DINOUCH.ouvrirSessionAdmin();
-            messageConnexion.textContent = "Connexion reussie. Redirection...";
-            messageConnexion.className = "feedback success";
-
-            window.setTimeout(() => {
-                window.location.replace("admin.html");
-            }, 250);
         });
+
+        verifierSessionExistante();
     </script>
 </body>
 </html>

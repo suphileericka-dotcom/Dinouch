@@ -8,13 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="catalogue.js"></script>
-    <script>
-        if (!window.DINOUCH.sessionAdminActive()) {
-            window.location.replace("admin_login.html");
-        }
-    </script>
 </head>
-<body class="bg-[#fcf9f6] p-6 text-[#32332f]" style="font-family: 'Inter', sans-serif;">
+<body class="bg-[#fcf9f6] p-6 text-[#32332f]" style="display: none; font-family: 'Inter', sans-serif;">
 
     <div class="mx-auto flex w-full max-w-5xl flex-col gap-6 lg:flex-row">
         <section class="flex-1 rounded-[28px] border border-black/5 bg-white p-8 shadow-sm">
@@ -28,6 +23,8 @@
                 </div>
                 <button onclick="deconnexion()" class="text-[10px] font-bold uppercase text-red-400">Quitter</button>
             </div>
+
+            <p id="statut-synchronisation" class="mb-6 rounded-2xl border border-black/5 bg-[#fcf9f6] px-4 py-3 text-xs leading-5 text-[#705b44]"></p>
 
             <form id="formulaire-produit" class="flex flex-col gap-4">
                 <div>
@@ -102,8 +99,6 @@
 
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
     <script>
-        window.DINOUCH.initialiserCatalogue();
-
         const formulaireProduit = document.getElementById("formulaire-produit");
         const nomProduit = document.getElementById("nom-produit");
         const prixProduit = document.getElementById("prix-produit");
@@ -117,9 +112,10 @@
         const compteurArticles = document.getElementById("compteur-articles");
         const listePhotos = document.getElementById("liste-photos");
         const compteurPhotos = document.getElementById("compteur-photos");
+        const statutSynchronisation = document.getElementById("statut-synchronisation");
 
-        function deconnexion() {
-            window.DINOUCH.fermerSessionAdmin();
+        async function deconnexion() {
+            await window.DINOUCH.fermerSessionAdmin();
             window.location.replace("admin_login.html");
         }
 
@@ -128,6 +124,22 @@
             imageApercu.src = "";
             conteneurApercu.classList.add("hidden");
             boutonUpload.classList.remove("hidden");
+        }
+
+        function afficherStatutSynchronisation() {
+            const statut = window.DINOUCH.lireStatutStockage();
+
+            if (statut.writable) {
+                statutSynchronisation.textContent = "Catalogue partage actif : les memes articles seront visibles sur telephone et sur ordinateur.";
+                return;
+            }
+
+            if (statut.shared) {
+                statutSynchronisation.textContent = "Lecture partagee active, mais la publication distante n'est pas encore disponible. Ajoutez GITHUB_TOKEN sur Vercel pour publier partout.";
+                return;
+            }
+
+            statutSynchronisation.textContent = statut.message || "Mode local actif : les changements ne seront pas synchronises entre les appareils.";
         }
 
         function afficherArticlesRecents() {
@@ -150,7 +162,6 @@
                         <div class="min-w-0 flex-1">
                             <h3 class="truncate text-sm font-bold text-[#32332f]">${window.DINOUCH.echapperTexte(produit.nom)}</h3>
                             <p class="mt-1 text-xs text-[#8d8882]">${window.DINOUCH.echapperTexte(produit.tailles.join(", "))}</p>
-                            <p class="mt-1 text-[11px] text-[#9e9d9a]">${Number(produit.vues) || 0} vues</p>
                         </div>
                         <span class="text-sm font-black text-[#615e5c]">${window.DINOUCH.formaterPrix(produit.prix)}</span>
                     </article>
@@ -214,7 +225,7 @@
             messageAdmin.textContent = "Le service d'upload n'est pas disponible pour le moment.";
         });
 
-        formulaireProduit.addEventListener("submit", (evenement) => {
+        formulaireProduit.addEventListener("submit", async (evenement) => {
             evenement.preventDefault();
 
             const tailles = Array.from(document.querySelectorAll('input[name="tailles"]:checked')).map((input) => input.value);
@@ -226,44 +237,67 @@
                 return;
             }
 
-            window.DINOUCH.ajouterAuCatalogue({
-                id: "dinouch-" + Date.now(),
-                nom,
-                prix,
-                image: urlPhoto.value.trim(),
-                tailles: tailles.length ? tailles : ["Unique"],
-                vues: 0,
-                description: descriptionProduit.value.trim() || "Une nouvelle piece ajoutee a la boutique DINOUCH."
-            });
+            try {
+                await window.DINOUCH.ajouterAuCatalogue({
+                    id: "dinouch-" + Date.now(),
+                    nom,
+                    prix,
+                    image: urlPhoto.value.trim(),
+                    tailles: tailles.length ? tailles : ["Unique"],
+                    vues: 0,
+                    description: descriptionProduit.value.trim() || "Une nouvelle piece ajoutee a la boutique DINOUCH."
+                });
 
-            formulaireProduit.reset();
-            reinitialiserImage();
-            messageAdmin.textContent = "Article publie avec succes.";
-            afficherArticlesRecents();
-            afficherGestionPhotos();
+                formulaireProduit.reset();
+                reinitialiserImage();
+                messageAdmin.textContent = "Article publie avec succes.";
+                afficherStatutSynchronisation();
+                afficherArticlesRecents();
+                afficherGestionPhotos();
+            } catch (erreur) {
+                messageAdmin.textContent = erreur.message || "Impossible de publier cet article sur le catalogue partage.";
+            }
         });
 
-        listePhotos.addEventListener("click", (evenement) => {
+        listePhotos.addEventListener("click", async (evenement) => {
             const bouton = evenement.target.closest("[data-retirer-photo]");
             if (!bouton) {
                 return;
             }
 
             const idProduit = bouton.dataset.retirerPhoto;
-            const produitSupprime = window.DINOUCH.supprimerProduit(idProduit);
+            try {
+                const produitSupprime = await window.DINOUCH.supprimerProduit(idProduit);
 
-            if (!produitSupprime) {
-                messageAdmin.textContent = "Impossible de supprimer cet article.";
+                if (!produitSupprime) {
+                    messageAdmin.textContent = "Impossible de supprimer cet article.";
+                    return;
+                }
+
+                messageAdmin.textContent = "L'article a ete supprime du site avec succes.";
+                afficherStatutSynchronisation();
+                afficherArticlesRecents();
+                afficherGestionPhotos();
+            } catch (erreur) {
+                messageAdmin.textContent = erreur.message || "Impossible de supprimer cet article du catalogue partage.";
+            }
+        });
+
+        async function initialiserAdmin() {
+            const sessionActive = await window.DINOUCH.verifierSessionAdmin(true);
+            if (!sessionActive) {
+                window.location.replace("admin_login.html");
                 return;
             }
 
-            messageAdmin.textContent = "L'article a ete supprime du site avec succes.";
+            await window.DINOUCH.initialiserCatalogue();
+            afficherStatutSynchronisation();
             afficherArticlesRecents();
             afficherGestionPhotos();
-        });
+            document.body.style.display = "";
+        }
 
-        afficherArticlesRecents();
-        afficherGestionPhotos();
+        initialiserAdmin();
     </script>
 </body>
 </html>

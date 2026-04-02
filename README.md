@@ -1,261 +1,102 @@
 # DINOUCH
 
-Boutique statique en HTML, CSS et JavaScript pour une gestion simple depuis le navigateur.
+Boutique statique HTML/CSS/JavaScript avec catalogue partage entre appareils via des fonctions Vercel.
 
-## Technologies utilisees
+## Ce qui a change
 
-- `HTML` pour la structure des pages
-- `Tailwind CSS` via CDN pour la mise en page rapide
-- `CSS` classique pour les styles specifiques a chaque page
-- `JavaScript` natif pour toute la logique
-- `localStorage` pour stocker les produits, le panier, la session admin et les vues
-- `Cloudinary` pour l'upload des photos
-- `Formspree` pour l'envoi des formulaires
+Avant, les produits etaient enregistres dans le `localStorage` du navigateur.
+Resultat :
+
+- le telephone et le PC pouvaient afficher des catalogues differents
+- Safari et Chrome pouvaient voir des donnees differentes
+- l'admin publiait seulement sur l'appareil utilise
+
+Maintenant :
+
+- la lecture du catalogue passe par `GET /api/catalogue`
+- le catalogue par defaut vit dans `data/catalogue.json`
+- l'admin se connecte via `POST /api/admin-auth`
+- les publications et suppressions passent par `POST /api/catalogue`
+- le panier reste local au navigateur, ce qui est normal
 
 ## Fichiers principaux
 
-- `index.html` : page d'accueil de la boutique
-- `produit.html` : fiche d'un produit
-- `panier.html` : panier et formulaire de commande
-- `suggestions.html` : page de suggestions clients
+- `index.html` : boutique
+- `produit.html` : fiche produit
+- `panier.html` : panier local
 - `admin_login.html` : connexion admin
-- `admin.html` : publication des produits et gestion des photos
-- `catalogue.js` : coeur logique du site
-- `style.css`, `panier.css`, `produit.css`, `suggestion.css`, `admin_login.css` : styles par page
+- `admin.html` : publication et suppression des produits
+- `catalogue.js` : logique front commune
+- `api/admin-auth.mjs` : session admin HTTP-only
+- `api/catalogue.mjs` : lecture et ecriture du catalogue partage
+- `lib/dinouch-auth.mjs` : signature/verif de session admin
+- `lib/dinouch-storage.mjs` : lecture/ecriture du catalogue
+- `data/catalogue.json` : catalogue partage de base
 
-## Comment l'interface a ete codee
+## Fonctionnement
 
-L'interface repose sur une base simple :
+### Lecture
 
-```html
-<main class="mx-auto flex w-full max-w-lg flex-1 flex-col px-4 py-6 pb-32">
-    <div id="grille-produits" class="grid grid-cols-2 gap-x-3 gap-y-8"></div>
-</main>
-```
+Le front appelle `/api/catalogue`.
 
-Ici, on cree une zone centrale avec une grille de cartes produit. Ensuite, le JavaScript remplit cette grille automatiquement.
+- si `GITHUB_TOKEN` est configure sur Vercel, l'API lit `data/catalogue.json` dans le repo GitHub
+- sinon l'API lit le fichier local deploye `data/catalogue.json`
 
-Exemple de carte produit dans `index.html` :
+Dans les deux cas, tous les appareils lisent la meme base de catalogue.
 
-```js
-function creerCarteProduit(produit) {
-    return `
-        <article class="product-card group">
-            <a href="produit.html?id=${window.DINOUCH.echapperTexte(produit.id)}" class="block">
-                ...
-            </a>
-            <button data-produit-id="${window.DINOUCH.echapperTexte(produit.id)}">
-                Ajouter au panier
-            </button>
-        </article>
-    `;
-}
-```
+### Publication admin
 
-Donc :
+Quand l'admin ajoute ou supprime un article :
 
-- le HTML prepare les emplacements
-- Tailwind gere le layout
-- JavaScript genere le contenu reel
+- l'utilisateur doit avoir une session admin valide
+- l'API ecrit le nouveau catalogue dans le repo GitHub
+- le site relit ensuite le catalogue partage
 
-## Comment le code fonctionne
+## Variables Vercel a ajouter
 
-### 1. Le catalogue
+Pour que les publications de l'admin soient visibles partout, ajoute au minimum :
 
-Le fichier `catalogue.js` contient la logique principale.
+- `GITHUB_TOKEN`
 
-Lecture du catalogue :
+Le token doit pouvoir modifier le repo `suphileericka-dotcom/Dinouch`.
 
-```js
-function lireCatalogue() {
-    initialiserCatalogue();
-    return lireJson(CLE_CATALOGUE, []).map(normaliserProduit);
-}
-```
+Variables optionnelles :
 
-Ajout d'un produit :
+- `ADMIN_PASSWORD`
+- `ADMIN_SESSION_SECRET`
+- `GITHUB_REPO_OWNER`
+- `GITHUB_REPO_NAME`
+- `GITHUB_REPO_BRANCH`
+- `GITHUB_CATALOGUE_PATH`
 
-```js
-function ajouterAuCatalogue(produit) {
-    const catalogueActuel = lireCatalogue();
-    ...
-    baseCatalogue.unshift(produitNormalise);
-    enregistrerCatalogue(baseCatalogue);
-    return produitNormalise;
-}
-```
+Par defaut, le projet utilise :
 
-Cela veut dire que chaque nouvel article publie dans `admin.html` est enregistre dans le `localStorage`, puis apparait dans la boutique.
+- repo : `suphileericka-dotcom/Dinouch`
+- branche : `main`
+- fichier catalogue : `data/catalogue.json`
+- mot de passe admin : `@16Dinou`
 
-### 2. La pagination
+## Important
 
-La pagination de la page d'accueil est geree dans `index.html`.
+- Sans `GITHUB_TOKEN`, le catalogue reste lisible partout mais l'admin ne peut pas publier de facon partagee.
+- Le panier reste volontairement local a chaque navigateur.
+- Les vues n'ont plus ete gardees dans l'interface, car ce n'etait pas une information fiable entre appareils.
 
-```js
-const totalPages = Math.max(1, Math.ceil(catalogue.length / window.DINOUCH.PRODUITS_PAR_PAGE));
-const debut = (pageCourante - 1) * window.DINOUCH.PRODUITS_PAR_PAGE;
-const produitsVisibles = catalogue.slice(debut, debut + window.DINOUCH.PRODUITS_PAR_PAGE);
-```
+## Deploiement
 
-Le nombre de produits par page est defini ici :
+Le projet reste compatible avec Vercel sans framework.
 
-```js
-const PRODUITS_PAR_PAGE = 15;
-```
+- les pages statiques servent le front
+- `api/*.mjs` servent les endpoints
+- aucune dependance npm n'a ete ajoutee
 
-dans `catalogue.js`.
+## Verification locale faite
 
-### 3. Les vues
+J'ai verifie :
 
-Les vues sont incrementees quand un visiteur ouvre `produit.html`.
-
-```js
-window.DINOUCH.incrementerVueUnique(produit.id);
-```
-
-et dans `catalogue.js` :
-
-```js
-function incrementerVueUnique(idProduit) {
-    const vuesUniques = lireJson(CLE_VUES_UNIQUES, {});
-    if (vuesUniques[idProduit]) {
-        return false;
-    }
-    ...
-    catalogue[index].vues = (Number(catalogue[index].vues) || 0) + 1;
-}
-```
-
-Important :
-
-- ce sont des vues uniques par navigateur
-- ce n'est pas un compteur global serveur
-
-### 4. Le panier
-
-Ajout au panier :
-
-```js
-window.DINOUCH.ajouterAuPanier(produit.id, tailleSelectionnee);
-```
-
-Dans `catalogue.js` :
-
-```js
-function ajouterAuPanier(entree, tailleChoisie) {
-    const produit = typeof entree === "string" ? trouverProduitParId(entree) : entree;
-    ...
-    panier.push({
-        id: produit.id,
-        nom: produit.nom,
-        prix: Number(produit.prix) || 0,
-        image: produit.image || "",
-        taille: tailleChoisie || "Unique"
-    });
-}
-```
-
-Le panier est ensuite relu dans `panier.html` pour afficher les articles et calculer le total.
-
-### 5. Le prix en FCF
-
-Le formatage du prix est centralise dans `catalogue.js` :
-
-```js
-function formaterPrix(prix) {
-    return new Intl.NumberFormat("fr-FR", {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
-    }).format(Number(prix) || 0) + " FCF";
-}
-```
-
-Comme cette fonction est appelee partout, changer la devise ici met a jour tout le site.
-
-### 6. La publication d'une photo
-
-Dans `admin.html`, l'upload se fait via Cloudinary :
-
-```js
-widgetCloudinary = cloudinary.createUploadWidget(
-    {
-        cloudName: "dues52ox5",
-        uploadPreset: "ml_default"
-    },
-    (erreur, resultat) => {
-        if (!erreur && resultat && resultat.event === "success") {
-            const imageUrl = resultat.info.secure_url;
-            imageApercu.src = imageUrl;
-            urlPhoto.value = imageUrl;
-        }
-    }
-);
-```
-
-Ensuite, l'URL de l'image est stockee dans le produit.
-
-### 7. Supprimer un article depuis l'admin
-
-La suppression d'un article depuis l'admin passe maintenant par `catalogue.js` :
-
-```js
-function supprimerProduit(idProduit) {
-    const catalogue = lireCatalogue();
-    const index = catalogue.findIndex((produit) => produit.id === idProduit);
-    if (index === -1) {
-        return false;
-    }
-    catalogue.splice(index, 1);
-    enregistrerCatalogue(catalogue);
-    return true;
-}
-```
-
-Cela ne supprime pas le fichier de Cloudinary.
-Cela retire l'article du catalogue du site.
-
-## Fonctionnement page par page
-
-### `admin.html`
-
-- ajoute un article
-- enregistre le produit
-- affiche les articles recents
-- permet de supprimer un article du site
-
-### `index.html`
-
-- lit le catalogue
-- affiche 15 produits par page
-- gere les boutons `Precedent` et `Suivant`
-
-### `produit.html`
-
-- lit l'id du produit dans l'URL
-- affiche la fiche complete
-- incremente les vues
-- ajoute au panier
-
-### `panier.html`
-
-- lit les produits en panier
-- calcule le total
-- prepare le champ cache envoye a Formspree
-
-## Limites actuelles
-
-- tout fonctionne cote navigateur
-- les donnees sont stockees dans `localStorage`
-- si on change d'appareil ou de navigateur, on ne retrouve pas les memes donnees
-- les vues ne sont pas centralisees sur un serveur
-- la suppression d'un article retire le produit du site, pas le fichier Cloudinary
-
-## Si tu veux faire evoluer le projet plus tard
-
-Les prochaines evolutions logiques seraient :
-
-- vraie base de donnees
-- vrai espace admin securise cote serveur
-- vraies vues globales
-- suppression Cloudinary cote serveur
-- edition complete d'un produit deja publie
+- la syntaxe de `catalogue.js`
+- la syntaxe des fichiers `api/*.mjs` et `lib/*.mjs`
+- `GET /api/catalogue` en local
+- `GET /api/admin-auth` en local
+- le refus de publication sans session admin
+- le message explicite si `GITHUB_TOKEN` n'est pas encore configure
