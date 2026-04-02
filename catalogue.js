@@ -215,6 +215,18 @@
         return { ...statutStockage };
     }
 
+    function publicationPartageeDisponible() {
+        return Boolean(statutStockage.writable);
+    }
+
+    function lireMessagePublicationIndisponible() {
+        if (statutStockage.shared) {
+            return "La photo peut etre envoyee sur Cloudinary, mais l'article ne sera pas enregistre sur le catalogue partage tant que GITHUB_TOKEN n'est pas ajoute sur Vercel.";
+        }
+
+        return statutStockage.message || "Le catalogue partage n'est pas disponible pour le moment.";
+    }
+
     function trouverProduitParId(idProduit) {
         return lireCatalogue().find((produit) => produit.id === idProduit) || null;
     }
@@ -245,6 +257,10 @@
             return normaliserProduit(donnees.produit || produit, 0);
         } catch (erreur) {
             if (!mutationLocaleAutorisee()) {
+                if (!statutStockage.writable) {
+                    throw new Error(lireMessagePublicationIndisponible());
+                }
+
                 throw erreur;
             }
 
@@ -294,6 +310,10 @@
             return true;
         } catch (erreur) {
             if (!mutationLocaleAutorisee()) {
+                if (!statutStockage.writable) {
+                    throw new Error(lireMessagePublicationIndisponible());
+                }
+
                 throw erreur;
             }
 
@@ -434,6 +454,8 @@
         initialiserCatalogue,
         lireCatalogue,
         lireStatutStockage,
+        publicationPartageeDisponible,
+        lireMessagePublicationIndisponible,
         trouverProduitParId,
         ajouterAuCatalogue,
         supprimerProduit,

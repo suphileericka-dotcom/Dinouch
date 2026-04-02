@@ -25,6 +25,20 @@
             </div>
 
             <p id="statut-synchronisation" class="mb-6 rounded-2xl border border-black/5 bg-[#fcf9f6] px-4 py-3 text-xs leading-5 text-[#705b44]"></p>
+            <div id="aide-publication" class="mb-6 hidden rounded-2xl border border-amber-200 bg-amber-50 px-4 py-4 text-xs leading-5 text-[#705b44]">
+                <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-[#8d5f28]">Publication distante requise</p>
+                <p class="mt-2">
+                    L'image peut partir sur Cloudinary, mais l'article ne sera pas sauvegarde dans la boutique tant que <strong>GITHUB_TOKEN</strong> n'est pas ajoute sur Vercel.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer" class="rounded-full border border-[#d9b382] bg-white px-4 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[#8d5f28] transition hover:bg-[#fff8ef]">
+                        Creer le token GitHub
+                    </a>
+                    <a href="https://vercel.com/docs/environment-variables/managing-environment-variables" target="_blank" rel="noopener noreferrer" class="rounded-full border border-[#d9b382] bg-white px-4 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[#8d5f28] transition hover:bg-[#fff8ef]">
+                        Ajouter sur Vercel
+                    </a>
+                </div>
+            </div>
 
             <form id="formulaire-produit" class="flex flex-col gap-4">
                 <div>
@@ -113,6 +127,8 @@
         const listePhotos = document.getElementById("liste-photos");
         const compteurPhotos = document.getElementById("compteur-photos");
         const statutSynchronisation = document.getElementById("statut-synchronisation");
+        const aidePublication = document.getElementById("aide-publication");
+        const boutonPublier = formulaireProduit.querySelector('button[type="submit"]');
 
         async function deconnexion() {
             await window.DINOUCH.fermerSessionAdmin();
@@ -135,11 +151,26 @@
             }
 
             if (statut.shared) {
-                statutSynchronisation.textContent = "Lecture partagee active, mais la publication distante n'est pas encore disponible. Ajoutez GITHUB_TOKEN sur Vercel pour publier partout.";
+                statutSynchronisation.textContent = "Lecture partagee active : les articles deja en ligne restent visibles partout, mais les nouveaux articles ne seront pas sauvegardes tant que GITHUB_TOKEN n'est pas ajoute sur Vercel.";
                 return;
             }
 
             statutSynchronisation.textContent = statut.message || "Mode local actif : les changements ne seront pas synchronises entre les appareils.";
+        }
+
+        function mettreAJourDisponibilitePublication() {
+            const publicationDisponible = window.DINOUCH.publicationPartageeDisponible();
+
+            boutonPublier.disabled = !publicationDisponible;
+            boutonPublier.classList.toggle("opacity-50", !publicationDisponible);
+            boutonPublier.classList.toggle("cursor-not-allowed", !publicationDisponible);
+            aidePublication.classList.toggle("hidden", publicationDisponible);
+
+            listePhotos.querySelectorAll("[data-retirer-photo]").forEach((bouton) => {
+                bouton.disabled = !publicationDisponible;
+                bouton.classList.toggle("opacity-50", !publicationDisponible);
+                bouton.classList.toggle("cursor-not-allowed", !publicationDisponible);
+            });
         }
 
         function afficherArticlesRecents() {
@@ -167,6 +198,8 @@
                     </article>
                 `;
             }).join("");
+
+            mettreAJourDisponibilitePublication();
         }
 
         function afficherGestionPhotos() {
@@ -193,6 +226,8 @@
                     </article>
                 `;
             }).join("");
+
+            mettreAJourDisponibilitePublication();
         }
 
         window.deconnexion = deconnexion;
@@ -227,6 +262,11 @@
 
         formulaireProduit.addEventListener("submit", async (evenement) => {
             evenement.preventDefault();
+
+            if (!window.DINOUCH.publicationPartageeDisponible()) {
+                messageAdmin.textContent = window.DINOUCH.lireMessagePublicationIndisponible();
+                return;
+            }
 
             const tailles = Array.from(document.querySelectorAll('input[name="tailles"]:checked')).map((input) => input.value);
             const nom = nomProduit.value.trim();
@@ -266,6 +306,12 @@
             }
 
             const idProduit = bouton.dataset.retirerPhoto;
+
+            if (!window.DINOUCH.publicationPartageeDisponible()) {
+                messageAdmin.textContent = window.DINOUCH.lireMessagePublicationIndisponible();
+                return;
+            }
+
             try {
                 const produitSupprime = await window.DINOUCH.supprimerProduit(idProduit);
 
@@ -294,6 +340,7 @@
             afficherStatutSynchronisation();
             afficherArticlesRecents();
             afficherGestionPhotos();
+            mettreAJourDisponibilitePublication();
             document.body.style.display = "";
         }
 

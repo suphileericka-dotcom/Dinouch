@@ -58,6 +58,23 @@ Pour que les publications de l'admin soient visibles partout, ajoute au minimum 
 
 - `GITHUB_TOKEN`
 
+## Configuration rapide de `GITHUB_TOKEN`
+
+Le plus simple est d'utiliser un token GitHub "fine-grained".
+
+1. Ouvre GitHub > `Settings` > `Developer settings` > `Personal access tokens` > `Fine-grained tokens`.
+2. Clique sur `Generate new token`.
+3. Choisis comme resource owner le compte qui possede le repo `suphileericka-dotcom/Dinouch`.
+4. Dans `Repository access`, selectionne uniquement le repo `Dinouch`.
+5. Dans `Permissions`, donne au minimum `Contents: Read and write`.
+6. Copie le token tout de suite apres creation.
+7. Dans Vercel > projet `Dinouch` > `Settings` > `Environment Variables`, ajoute :
+   - nom : `GITHUB_TOKEN`
+   - valeur : le token GitHub
+8. Sauvegarde puis redeploie le projet pour que la variable soit prise en compte.
+
+Si tu utilises un token GitHub "classic", il faut au minimum le scope `repo`, mais GitHub recommande plutot les tokens fine-grained.
+
 Le token doit pouvoir modifier le repo `suphileericka-dotcom/Dinouch`.
 
 Variables optionnelles :
