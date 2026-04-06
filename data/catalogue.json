@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775512738349",
+    "nom": "Divine BOKATOLA",
+    "prix": 1000000000000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775512716/lruxuhwcn0pgwchj4my5.jpg",
+    "tailles": [
+      "M"
+    ],
+    "vues": 0,
+    "description": "Une nouvelle piece ajoutee a la boutique DINOUCH.",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775512433051",
     "nom": "Sac",
     "prix": 4000,
