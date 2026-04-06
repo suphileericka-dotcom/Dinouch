@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775511687752",
+    "nom": "Bandeaux et chouchous",
+    "prix": 4500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775511649/rkvncqttzwjsud9bwkru.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Bandeaux chouchous ensemble",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775511598658",
     "nom": "Parfum",
     "prix": 3000,
