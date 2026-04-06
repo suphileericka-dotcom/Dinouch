@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775511740832",
+    "nom": "Led sunset",
+    "prix": 3500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775511706/birzvcx57kngnlffsnsq.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Lumière 7couleurs",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775511687752",
     "nom": "Bandeaux et chouchous",
     "prix": 4500,
