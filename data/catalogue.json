@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775512826084",
+    "nom": "Création de site Web",
+    "prix": 183000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775512796/rlnxlwnyfpitkp5anc4r.png",
+    "tailles": [
+      "S"
+    ],
+    "vues": 0,
+    "description": "Une nouvelle piece ajoutee a la boutique DINOUCH.",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775512738349",
     "nom": "Divine BOKATOLA",
     "prix": 1000000000000,
