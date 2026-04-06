@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775510983622",
+    "nom": "Affiche manga",
+    "prix": 5500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775510956/ktrglwjng2dhxknsaatm.jpg",
+    "tailles": [
+      "L"
+    ],
+    "vues": 0,
+    "description": "1 pièce Affiche d'art mural, Affiche de dessin animé vintage \"I Want To Tell You\", Décoration étanche pour la maison, le salon, la chambre à coucher, peinture sur canevas sans cadre",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775510911839",
     "nom": "Affiche manga",
     "prix": 6000,
