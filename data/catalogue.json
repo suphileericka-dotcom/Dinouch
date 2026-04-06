@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775511286603",
+    "nom": "Patchs pour bouton",
+    "prix": 3500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775511240/zauxu2le1va0nezgcdty.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Contre les boutons",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775511144063",
     "nom": "Demi pour femme",
     "prix": 11000,
