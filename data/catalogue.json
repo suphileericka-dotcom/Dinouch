@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "id": "dinouch-1775510628391",
+    "nom": "Tee-shirt attaque des titans",
+    "prix": 15000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775510565/v9sm7jktkz8xaolkdkaz.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Confirme pour se sentir mieux",
+    "estExemple": false
+  }
+]
