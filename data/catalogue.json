@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775513023156",
+    "nom": "Affiche AO HARU RIDE",
+    "prix": 5800,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775512957/qa3yewta07tmrvvatnje.jpg",
+    "tailles": [
+      "M"
+    ],
+    "vues": 0,
+    "description": "Une nouvelle piece ajoutee a la boutique DINOUCH.",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775512826084",
     "nom": "Création de site Web",
     "prix": 183000,
