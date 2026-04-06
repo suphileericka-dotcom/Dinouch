@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775511598658",
+    "nom": "Parfum",
+    "prix": 3000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775511450/rdtsxbotyrqodveoob17.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Parfum unitaire",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775511436009",
     "nom": "Bandeaux",
     "prix": 800,
