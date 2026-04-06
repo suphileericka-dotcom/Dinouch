@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775510837536",
+    "nom": "Affiche Silent Voice",
+    "prix": 5800,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775510825/nzl0avqytkuod3duox1a.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Affiche pour decoration de maison",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775510733397",
     "nom": "Teeshirt one pièce gear 5",
     "prix": 12000,
