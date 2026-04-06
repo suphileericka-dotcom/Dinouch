@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775510911839",
+    "nom": "Affiche manga",
+    "prix": 6000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775510861/fcbsnjh3czqpz1jyvnnu.jpg",
+    "tailles": [
+      "L"
+    ],
+    "vues": 0,
+    "description": "Une nouvelle piece ajoutee a la boutique DINOUCH.",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775510837536",
     "nom": "Affiche Silent Voice",
     "prix": 5800,
