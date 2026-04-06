@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775511331697",
+    "nom": "Bandeaux",
+    "prix": 800,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775511310/nsuylddunkkkdwaisv9a.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Bandeaux pour cheveux",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775511286603",
     "nom": "Patchs pour bouton",
     "prix": 3500,
