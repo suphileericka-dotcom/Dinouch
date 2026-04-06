@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775511144063",
+    "nom": "Demi pour femme",
+    "prix": 11000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775511083/itecw57sg0e46my2ay5p.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "4 pieces",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775510983622",
     "nom": "Affiche manga",
     "prix": 5500,
