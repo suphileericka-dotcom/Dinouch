@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775510733397",
+    "nom": "Teeshirt one pièce gear 5",
+    "prix": 12000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775510651/witwtanncqzaxmfpxv9f.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Conforme à toutes les saisons",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775510628391",
     "nom": "Tee-shirt attaque des titans",
     "prix": 15000,
