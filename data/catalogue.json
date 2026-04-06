@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775511384389",
+    "nom": "Bandeaux",
+    "prix": 800,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775511350/l2pd597eorsllxtsvtpd.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Bandeaux pour chevuex",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775511331697",
     "nom": "Bandeaux",
     "prix": 800,
