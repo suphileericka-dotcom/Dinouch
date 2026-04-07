@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775596398885",
+    "nom": "Gobelet portatif isotherme",
+    "prix": 7000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775596356/xlnzxf8rjb7g7qezmpxa.jpg",
+    "tailles": [
+      "M"
+    ],
+    "vues": 0,
+    "description": "Gobelet isotherme à double paroi en acier inoxydable, motif ours en peluche,380 ml. Idéal pour la salle de sport, le bureau, la maison, les activités de plein air, les voyages, les cadeaux de fêtes, les remises de diplômes, la rentrée scolaire et la fête des mères.",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775595882070",
     "nom": "Bouteille inoxydable",
     "prix": 14000,
