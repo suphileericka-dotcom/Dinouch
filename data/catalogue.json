@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775549678037",
+    "nom": "Noeuds papillon",
+    "prix": 4500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775549629/e5h6vu0kbtbjhvovklym.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Noeuds papillon pour cheveux",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775549474682",
     "nom": "Micro baladeur",
     "prix": 5500,
