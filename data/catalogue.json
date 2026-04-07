@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775549820396",
+    "nom": "Faux Ongles",
+    "prix": 3000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775549783/m7t461dex2dgiw4kz1oi.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Faux ongles bleu",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775549746802",
     "nom": "Haut demi",
     "prix": 4600,
