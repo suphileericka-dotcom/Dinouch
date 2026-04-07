@@ -1,5 +1,18 @@
 [
   {
+    "id": "dinouch-1775548097519",
+    "nom": "Affiche DIEU est bon tout le temps  Encadré tableau",
+    "prix": 9000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775548042/pzd8w5cfcbrzuwphwxac.jpg",
+    "tailles": [
+      "S",
+      "M"
+    ],
+    "vues": 0,
+    "description": "Affiche DIEU est bon tout le temps \nEncadré tableau",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775513023156",
     "nom": "Affiche AO HARU RIDE",
     "prix": 5800,
