@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775548185324",
+    "nom": "Appareil photo",
+    "prix": 20000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775548149/wooqc5f3yb3puhqcsigv.jpg",
+    "tailles": [
+      "S"
+    ],
+    "vues": 0,
+    "description": "Appareil photo mini capacité",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775548097519",
     "nom": "Affiche DIEU est bon tout le temps  Encadré tableau",
     "prix": 9000,
