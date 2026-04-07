@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775548778727",
+    "nom": "Led pour 16 couleurs",
+    "prix": 6500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775548714/ibxtxafbnqidpeytxv1y.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Led 16couleurs",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775548577367",
     "nom": "Collier de taille",
     "prix": 4500,
