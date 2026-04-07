@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775548577367",
+    "nom": "Collier de taille",
+    "prix": 4500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775548551/dhvmxcbxt5k0cz3g6sjy.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Collier de taille",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775548466347",
     "nom": "Chapeau en coton",
     "prix": 6500,
