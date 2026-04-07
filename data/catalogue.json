@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775550029658",
+    "nom": "Colliers homme",
+    "prix": 3500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775549990/huyztnl6jmorsih8h3le.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Colliershommes",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775549939639",
     "nom": "Haut gainant",
     "prix": 6600,
