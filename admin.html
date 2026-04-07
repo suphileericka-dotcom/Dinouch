@@ -66,6 +66,31 @@
         </section>
 
         <aside class="w-full rounded-[28px] border border-black/5 bg-white p-8 shadow-sm lg:max-w-sm">
+            <section class="mb-8 rounded-[28px] border border-black/5 bg-[#fcf9f6] p-5">
+                <div class="flex items-start justify-between gap-3">
+                    <div>
+                        <p class="text-[10px] uppercase tracking-[0.3em] text-[#9e9d9a]">Audience</p>
+                        <h2 class="mt-2 text-xl font-black text-[#615e5c]" style="font-family: 'Epilogue', sans-serif;">Visites du site</h2>
+                    </div>
+                    <span id="statut-visites" class="rounded-full bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#705b44]">Lecture</span>
+                </div>
+
+                <div class="mt-5 grid grid-cols-2 gap-3">
+                    <div class="rounded-2xl bg-white p-4">
+                        <p class="text-[10px] uppercase tracking-[0.22em] text-[#9e9d9a]">Visiteurs estimes</p>
+                        <p id="compteur-visiteurs" class="mt-2 text-2xl font-black text-[#32332f]">0</p>
+                    </div>
+                    <div class="rounded-2xl bg-white p-4">
+                        <p class="text-[10px] uppercase tracking-[0.22em] text-[#9e9d9a]">Visites totales</p>
+                        <p id="compteur-visites" class="mt-2 text-2xl font-black text-[#32332f]">0</p>
+                    </div>
+                </div>
+
+                <p id="derniere-visite" class="mt-4 text-xs leading-5 text-[#8d8882]">
+                    Les statistiques de frequentation seront affichees ici.
+                </p>
+            </section>
+
             <div class="flex items-center justify-between gap-3">
                 <div>
                     <p class="text-[10px] uppercase tracking-[0.3em] text-[#9e9d9a]">Catalogue</p>
@@ -114,6 +139,10 @@
         const compteurPhotos = document.getElementById("compteur-photos");
         const statutSynchronisation = document.getElementById("statut-synchronisation");
         const boutonPublier = formulaireProduit.querySelector('button[type="submit"]');
+        const compteurVisiteurs = document.getElementById("compteur-visiteurs");
+        const compteurVisites = document.getElementById("compteur-visites");
+        const derniereVisite = document.getElementById("derniere-visite");
+        const statutVisites = document.getElementById("statut-visites");
 
         async function deconnexion() {
             await window.DINOUCH.fermerSessionAdmin();
@@ -141,6 +170,57 @@
             }
 
             statutSynchronisation.textContent = statut.message || "Mode local actif : les changements ne seront pas synchronises entre les appareils.";
+        }
+
+        function formaterNombre(valeur) {
+            return new Intl.NumberFormat("fr-FR").format(Number(valeur) || 0);
+        }
+
+        function formaterDerniereVisite(iso) {
+            if (!iso) {
+                return "Aucune visite n'a encore ete enregistree.";
+            }
+
+            const date = new Date(iso);
+
+            if (Number.isNaN(date.getTime())) {
+                return "Une visite a ete enregistree recemment.";
+            }
+
+            return "Derniere visite : " + date.toLocaleString("fr-FR", {
+                dateStyle: "medium",
+                timeStyle: "short"
+            });
+        }
+
+        async function afficherStatistiquesVisites() {
+            compteurVisiteurs.textContent = "0";
+            compteurVisites.textContent = "0";
+            statutVisites.textContent = "Lecture";
+            derniereVisite.textContent = "Chargement des statistiques...";
+
+            try {
+                const resultat = await window.DINOUCH.lireStatistiquesSite();
+
+                compteurVisiteurs.textContent = formaterNombre(resultat.statistiques.visiteursUniquesEstimes);
+                compteurVisites.textContent = formaterNombre(resultat.statistiques.visitesTotales);
+                derniereVisite.textContent = formaterDerniereVisite(resultat.statistiques.derniereVisite);
+
+                if (resultat.writable) {
+                    statutVisites.textContent = "Actif";
+                } else if (resultat.shared) {
+                    statutVisites.textContent = "Lecture";
+                } else {
+                    statutVisites.textContent = "Local";
+                }
+
+                if (!resultat.writable && resultat.message) {
+                    derniereVisite.textContent += " " + resultat.message;
+                }
+            } catch (erreur) {
+                statutVisites.textContent = "Indispo";
+                derniereVisite.textContent = erreur.message || "Impossible de charger les statistiques de visite.";
+            }
         }
 
         function mettreAJourDisponibilitePublication() {
@@ -321,6 +401,7 @@
             }
 
             await window.DINOUCH.initialiserCatalogue();
+            await afficherStatistiquesVisites();
             afficherStatutSynchronisation();
             afficherArticlesRecents();
             afficherGestionPhotos();
