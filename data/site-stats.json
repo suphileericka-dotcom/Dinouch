@@ -1,6 +1,8 @@
 {
-  "visitesTotales": 0,
-  "visiteursUniquesEstimes": 0,
-  "derniereVisite": "",
-  "visiteurs": {}
+  "visitesTotales": 1,
+  "visiteursUniquesEstimes": 1,
+  "derniereVisite": "2026-04-07T21:33:04.657Z",
+  "visiteurs": {
+    "0f6c6fc32e2d5989463fd3006c8aa456950be9872e1fe7ff04e543f4953f7f01": "2026-04-07T21:33:04.657Z"
+  }
 }
