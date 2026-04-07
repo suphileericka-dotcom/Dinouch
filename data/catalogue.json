@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775548296015",
+    "nom": "Collier personnalisé",
+    "prix": 5500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775548241/ofesusgudrciedaeo1rg.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Collier personn argenté",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775548185324",
     "nom": "Appareil photo",
     "prix": 20000,
