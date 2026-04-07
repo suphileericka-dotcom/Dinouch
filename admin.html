@@ -285,7 +285,9 @@
                     + formaterNombre(statistiques.visitesTotales)
                     + " visites, "
                     + formaterNombre(statistiques.visiteursUniquesEstimes)
-                    + " visiteurs estimes.";
+                    + " visiteurs estimes. Fuseau : "
+                    + (statistiques.fuseauHoraire || "Europe/Paris")
+                    + ".";
 
                 if (resultat.writable) {
                     statutVisites.textContent = "Actif";
