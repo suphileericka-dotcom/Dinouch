@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775595157605",
+    "nom": "Tasse de voiture",
+    "prix": 12800,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775595108/feuteax8kxitfhfmlrj0.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Tasse de voiture en acier inoxydable de 40 oz, mug avec strass et paille, 1 pièce Bouteille d'eau isolée sous vide pour la maison, le bureau ou la voiture, tasse réutilisable avec paille résistante aux fuites à clapet (rose, noir, vert, violet, bleu) Noël pour les fêtes et la Saint-Valentin Cadeau",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775594605735",
     "nom": "1 pièce Tasse à café élégante en acier inoxydable à double paroi de 500 ml avec design nœud, Mug isotherme, Mug de voyage, Tasse à thé, Bouteille d'eau, Convient pour les voyages, le bureau, la maison, l'école, la voiture et autres scénarios, Cadeaux de Noël, Fête des Mères, Saint-Valentin, Anniversaire et autres fêtes",
     "prix": 11400,
