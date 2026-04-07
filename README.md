@@ -52,6 +52,7 @@ Quand un visiteur ouvre une page publique du site :
 
 - le navigateur recoit un identifiant local
 - `POST /api/site-views` enregistre une visite pour la session en cours
+- l'API ignore les robots les plus courants et limite le comptage a une visite par navigateur et par heure
 - l'admin peut consulter les chiffres dans `admin.html`
 
 Les "visiteurs estimes" representent des navigateurs uniques, pas des personnes verifiees avec certitude.
