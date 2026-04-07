@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775548466347",
+    "nom": "Chapeau en coton",
+    "prix": 6500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775548424/hm9ncwis9wzizshvrf5c.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Chapeau en coton en laine",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775548296015",
     "nom": "Collier personnalisé",
     "prix": 5500,
