@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775549746802",
+    "nom": "Haut demi",
+    "prix": 4600,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775549717/qmzl7fsd4e9vqkrhacc9.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Haut pour femme",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775549678037",
     "nom": "Noeuds papillon",
     "prix": 4500,
