@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775549106684",
+    "nom": "Sac Lacoste",
+    "prix": 9000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775549066/axtt00ktxojvwoih4e8j.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Sac Lacoste",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775548930412",
     "nom": "Correcteur",
     "prix": 4500,
