@@ -340,10 +340,28 @@
     }
 
     function normaliserStatistiquesSite(statistiques) {
+        const jourActuel = statistiques && typeof statistiques.jourActuel === "object" && !Array.isArray(statistiques.jourActuel)
+            ? statistiques.jourActuel
+            : {};
+        const historiqueJournalier = Array.isArray(statistiques?.historiqueJournalier)
+            ? statistiques.historiqueJournalier
+            : [];
+
         return {
             visitesTotales: Math.max(0, Number(statistiques?.visitesTotales) || 0),
             visiteursUniquesEstimes: Math.max(0, Number(statistiques?.visiteursUniquesEstimes) || 0),
-            derniereVisite: String(statistiques?.derniereVisite || "")
+            derniereVisite: String(statistiques?.derniereVisite || ""),
+            fuseauHoraire: String(statistiques?.fuseauHoraire || "UTC"),
+            jourActuel: {
+                date: String(jourActuel.date || ""),
+                visitesTotales: Math.max(0, Number(jourActuel.visitesTotales) || 0),
+                visiteursUniquesEstimes: Math.max(0, Number(jourActuel.visiteursUniquesEstimes) || 0)
+            },
+            historiqueJournalier: historiqueJournalier.map((statistiquesJour) => ({
+                date: String(statistiquesJour?.date || ""),
+                visitesTotales: Math.max(0, Number(statistiquesJour?.visitesTotales) || 0),
+                visiteursUniquesEstimes: Math.max(0, Number(statistiquesJour?.visiteursUniquesEstimes) || 0)
+            }))
         };
     }
 
