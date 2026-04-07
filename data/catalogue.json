@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775549939639",
+    "nom": "Haut gainant",
+    "prix": 6600,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775549891/iiqsbnry4cylambtg8fb.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Haut gainant en forme de maillot de bain",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775549820396",
     "nom": "Faux Ongles",
     "prix": 3000,
