@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775554458297",
+    "nom": "Combinaison",
+    "prix": 9500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775554406/pk6pcchg6lzv7gnvmthy.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Combinaison de sport",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775550191724",
     "nom": "Colliers grains de café et colliers",
     "prix": 3500,
