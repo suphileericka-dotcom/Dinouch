@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775548930412",
+    "nom": "Correcteur",
+    "prix": 4500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775548872/dyqe4e3tuaonjkbtycr9.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Correcteur pour erreurs en ecrit",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775548778727",
     "nom": "Led pour 16 couleurs",
     "prix": 6500,
