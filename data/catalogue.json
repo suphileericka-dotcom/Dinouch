@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775549474682",
+    "nom": "Micro baladeur",
+    "prix": 5500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775549378/iagllchzvrici0a0lfq1.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Micro baladeur pour video  une pièce 5500 fcfa \nDeux pieces 8500 fcfa",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775549106684",
     "nom": "Sac Lacoste",
     "prix": 9000,
