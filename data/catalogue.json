@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775554699536",
+    "nom": "Combinaison de sport",
+    "prix": 8000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775554657/kynv4u1livqdzzfknxyq.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Combinaison de sport",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775554631578",
     "nom": "Combinaison de sport",
     "prix": 11000,
