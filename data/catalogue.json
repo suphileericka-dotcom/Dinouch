@@ -1,5 +1,19 @@
 [
   {
+    "id": "dinouch-1775657084603",
+    "nom": "Soleia Ensemble 2 pièces femme avec Top à manches longues",
+    "prix": 15000,
+    "image": "",
+    "tailles": [
+      "S",
+      "M",
+      "L"
+    ],
+    "vues": 0,
+    "description": "Soleia Ensemble 2 pièces femme avec Top à manches longues à imprimé floral rétro et lettres avec nœud devant + mini-jupe, tenue décontractée pour vacances, rendez-vous, thé de l'après-midi, plage, croisière, voyage en ville, festival de musique, fête, style boho, hippie, western, trajet quotidien",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775656880399",
     "nom": "Débardeur floral",
     "prix": 7000,
