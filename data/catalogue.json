@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775654548464",
+    "nom": "Body sans manches",
+    "prix": 15000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775654510/g4vloszgh6khwza8rflf.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "SHEIN Unity 3 pièces Body simple à col drapé de couleur unie d'été pour femmes, tenues de base pour les femmes, tenues de plage pour femmes, tenues de plage, hauts de base pour femmes, vêtements de sport pour femmes",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775652364120",
     "nom": "Ensemble de haut décolleté en tissu",
     "prix": 13500,
