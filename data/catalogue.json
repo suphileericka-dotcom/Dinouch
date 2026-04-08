@@ -1,5 +1,19 @@
 [
   {
+    "id": "dinouch-1775656754534",
+    "nom": "Débardeur rouge",
+    "prix": 6500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775656705/joy5b9qmcycfu3e33m6s.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L"
+    ],
+    "vues": 0,
+    "description": "Soleia Débardeur rouge  texturé ajusté en tricot pour femme, idéal pour les vacances",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775656498750",
     "nom": "Haut dos nu",
     "prix": 8500,
