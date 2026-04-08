@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775646526593",
+    "nom": "Sac tote bag",
+    "prix": 3800,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775646441/nxmz8qri6bzasihhsvsv.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Une nouvelle piece ajoutee a la boutique DINOUCH.",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775596398885",
     "nom": "Gobelet portatif isotherme",
     "prix": 7000,
