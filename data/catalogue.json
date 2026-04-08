@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775655026177",
+    "nom": "Jupe classique",
+    "prix": 9000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775654966/dndnxs3lmpl7rtroxu7q.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Avenya Jupe casual à pois en tricot avec ourlet en queue de poisson pour femmes",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775655024748",
     "nom": "Jupe classique",
     "prix": 9000,
