@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775656498750",
+    "nom": "Haut dos nu",
+    "prix": 8500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775656458/wcwrota43mnuhjwdbujx.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Soleia 2 pièces Débardeur rouge et noir à col ras-du-cou sans dos, imprimé froncé, pour femmes, convient pour l'été",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775656030486",
     "nom": "Haut dis nu",
     "prix": 12500,
