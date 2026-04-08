@@ -1,7 +1,7 @@
 {
-  "visitesTotales": 185,
-  "visiteursUniquesEstimes": 180,
-  "derniereVisite": "2026-04-08T07:35:59.428Z",
+  "visitesTotales": 186,
+  "visiteursUniquesEstimes": 181,
+  "derniereVisite": "2026-04-08T07:36:06.514Z",
   "visiteurs": {
     "0f6c6fc32e2d5989463fd3006c8aa456950be9872e1fe7ff04e543f4953f7f01": "2026-04-07T21:33:04.657Z",
     "791f61efd2e7e3a96606ad7f8a068e196f9cb52a1f869d418cd3c74e7645e9fa": "2026-04-07T21:33:05.741Z",
@@ -182,7 +182,8 @@
     "34f525dd33702f07a458571446a2fcbc3ccf44785e39dc443c1bb4ca48ef95f2": "2026-04-08T07:35:51.565Z",
     "e6290b42a724b286000e35be55f383bac073ebbcf98e0fb380eb8aaf90a032a9": "2026-04-08T07:35:52.431Z",
     "c66527a09c8bdf2cbedaf2b51fc4f8115542ca192f3bf2d7e5ae9b851e00ea30": "2026-04-08T07:35:58.572Z",
-    "0e051a0ae09aeb46e3c9c77c9d4e750be682ec0e569d2ad21cf1beac9bd04e6a": "2026-04-08T07:35:59.428Z"
+    "0e051a0ae09aeb46e3c9c77c9d4e750be682ec0e569d2ad21cf1beac9bd04e6a": "2026-04-08T07:35:59.428Z",
+    "e1e24a029c7c5dd49fb236b78b058699fd5adbed0a57b8b3944c0f3207655ff2": "2026-04-08T07:36:06.514Z"
   },
   "jours": {
     "2026-04-07": {
@@ -328,8 +329,8 @@
       }
     },
     "2026-04-08": {
-      "visitesTotales": 44,
-      "visiteursUniquesEstimes": 44,
+      "visitesTotales": 45,
+      "visiteursUniquesEstimes": 45,
       "visiteurs": {
         "8a1cb9db05f8fe2205415ec5469333259292477d00ae934d14fb1fd6e74b0430": "2026-04-08T05:08:11.687Z",
         "d2c09234b9e3ae04560e816c55f49f870876d9c926b1edbe6c5fffd8f4f62ccb": "2026-04-08T05:08:24.510Z",
@@ -374,7 +375,8 @@
         "34f525dd33702f07a458571446a2fcbc3ccf44785e39dc443c1bb4ca48ef95f2": "2026-04-08T07:35:51.565Z",
         "e6290b42a724b286000e35be55f383bac073ebbcf98e0fb380eb8aaf90a032a9": "2026-04-08T07:35:52.431Z",
         "c66527a09c8bdf2cbedaf2b51fc4f8115542ca192f3bf2d7e5ae9b851e00ea30": "2026-04-08T07:35:58.572Z",
-        "0e051a0ae09aeb46e3c9c77c9d4e750be682ec0e569d2ad21cf1beac9bd04e6a": "2026-04-08T07:35:59.428Z"
+        "0e051a0ae09aeb46e3c9c77c9d4e750be682ec0e569d2ad21cf1beac9bd04e6a": "2026-04-08T07:35:59.428Z",
+        "e1e24a029c7c5dd49fb236b78b058699fd5adbed0a57b8b3944c0f3207655ff2": "2026-04-08T07:36:06.514Z"
       }
     }
   }
