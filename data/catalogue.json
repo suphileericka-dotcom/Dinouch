@@ -1,5 +1,18 @@
 [
   {
+    "id": "dinouch-1775655611645",
+    "nom": "Vêtements dos nus",
+    "prix": 14000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775655556/qev6vyalfwq0dsuthvsx.jpg",
+    "tailles": [
+      "S",
+      "M"
+    ],
+    "vues": 0,
+    "description": "Soleia Top sans manches décontracté pour vacances, invité de mariage sur la plage, remise des diplômes, brunch, style bohème élégant tropical avec nœud papillon, bretelles nouées, ourlet asymétrique, dos nu. Convient pour la Saint-Patrick, les vacances de printemps, Pâques, les festivals de musique",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775655026177",
     "nom": "Jupe classique",
     "prix": 9000,
