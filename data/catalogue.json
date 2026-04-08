@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775652364120",
+    "nom": "Ensemble de haut décolleté en tissu",
+    "prix": 13500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775652229/ljrxpwinui4ypynzaelw.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Soleia Tenue de vacances décontractée saison seche /saison de pluie pour mariage sur la plage, fête d'invités, brunch de remise des diplômes, tenue élégante bohème tropicale pour la Saint-Patrick, les vacances de printemps, Pâques, les festivals de musique. Top femme avec nœud devant, dos nu, ourlet asymétrique, en vert, jaune, abricot.",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775648725668",
     "nom": "Sac tote bag",
     "prix": 3800,
