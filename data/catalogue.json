@@ -1,5 +1,19 @@
 [
   {
+    "id": "dinouch-1775655986971",
+    "nom": "Haut dos nu",
+    "prix": 13000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775655964/qv3cpgossqqodx5lothb.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L"
+    ],
+    "vues": 0,
+    "description": "Soleia 3 pièces/set Style vacances décontracté, style sexy d'île tropicale, combinaison fuchsia et noir, top à bretelles spaghetti à ourlet asymétrique avec motif tropical floral fuchsia éclaboussure d'encre, convient pour l'été, la plage, les fêtes, les festivals de musique",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775655869831",
     "nom": "Haut femme",
     "prix": 12600,
