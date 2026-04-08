@@ -1,5 +1,19 @@
 [
   {
+    "id": "dinouch-1775656880399",
+    "nom": "Débardeur floral",
+    "prix": 7000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775656852/mlc4f9hvd1gkmgfr8yzm.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L"
+    ],
+    "vues": 0,
+    "description": "Soleia Débardeur de fête, de plage, de vacances d'été, de la Saint-Valentin, de carnaval pour femmes. Débardeur décontracté rouge à imprimé floral avec nœud devant et encolure bateaux, style Y2K",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775656754534",
     "nom": "Débardeur rouge",
     "prix": 6500,
