@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775657546734",
+    "nom": "Collier de taille",
+    "prix": 4500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775657521/kbvcissquynue9lzbvxn.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Collier de hanche",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775657489508",
     "nom": "Ensemble jupe et haut",
     "prix": 15000,
