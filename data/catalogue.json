@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775648725668",
+    "nom": "Sac tote bag",
+    "prix": 3800,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775648648/yigmjnsubrhfi2rk4whk.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Sac à pain",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775646526593",
     "nom": "Sac tote bag",
     "prix": 3800,
