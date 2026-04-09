@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775694380724",
+    "nom": "Chemise masculine",
+    "prix": 5500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775694329/hh98ubsxfpo7q5nbulve.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Chemise masculine décontractée rouge à carreaux",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775693651654",
     "nom": "Robe moulante",
     "prix": 7000,
