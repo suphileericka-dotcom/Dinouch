@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775695817968",
+    "nom": "Ensemble sexy girl",
+    "prix": 18500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775695806/rrg8q8vkcannqu5pp30t.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "MainGRLe 2 pièces Ensemble t-shirt à manches longues ajusté et pantalon à col V profond sexy et décontracté pour femmes, saison seche et de pluie \nCouleur bleu , noir , rose et belge",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775695410650",
     "nom": "Marque MUCHICA ensemble jogging et T-Shirt",
     "prix": 18000,
