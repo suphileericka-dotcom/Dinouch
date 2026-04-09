@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775694558433",
+    "nom": "Teeshirt one pièce",
+    "prix": 9000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775694535/fymt47c2ekdvsdqxt0iy.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Teeshirt one pièce noir ou blanc confortable",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775694380724",
     "nom": "Chemise masculine",
     "prix": 5500,
