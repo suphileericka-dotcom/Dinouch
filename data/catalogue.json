@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775697564032",
+    "nom": "Mini sac à main",
+    "prix": 9000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775697545/mlixidj3ymhmvab1bfut.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "1 pièce Sac fourre-tout vintage de haute qualité à la mode polyvalent avec sensation de haut de gamme",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775697426038",
     "nom": "Mini sac à main vernisé",
     "prix": 6000,
