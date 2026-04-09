@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775698166179",
+    "nom": "Sac à main rouge bordeaux",
+    "prix": 9000,
+    "image": "",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Une nouvelle piece ajoutee a la boutique DINOUCH.",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775698069075",
     "nom": "Sac à main rouge vernisé",
     "prix": 7800,
