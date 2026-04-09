@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775699063811",
+    "nom": "Affiche horimiya",
+    "prix": 4000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775699059/rsk7cwyqg7cgogkqihb5.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Affiche manga horimiya sans cadre",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775698900599",
     "nom": "Pose téléphone",
     "prix": 3500,
