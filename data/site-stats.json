@@ -1,7 +1,7 @@
 {
-  "visitesTotales": 259,
-  "visiteursUniquesEstimes": 243,
-  "derniereVisite": "2026-04-09T08:13:34.943Z",
+  "visitesTotales": 260,
+  "visiteursUniquesEstimes": 244,
+  "derniereVisite": "2026-04-09T08:13:38.917Z",
   "visiteurs": {
     "0f6c6fc32e2d5989463fd3006c8aa456950be9872e1fe7ff04e543f4953f7f01": "2026-04-07T21:33:04.657Z",
     "791f61efd2e7e3a96606ad7f8a068e196f9cb52a1f869d418cd3c74e7645e9fa": "2026-04-07T21:33:05.741Z",
@@ -245,7 +245,8 @@
     "6003cceb38f351df58ba234cc78c16e3ad71df55f2c9459bf456521d5f9d3b6d": "2026-04-09T07:55:06.041Z",
     "f8a25f8bdb489f3b15b3cfb0d526f1699f27511063ee50cd7a10c633590be555": "2026-04-09T07:55:07.274Z",
     "4ed36a50499d615ff2b1f4b2e39027d52e2119b6dce9736fc18b6adb46b3b78c": "2026-04-09T07:55:35.786Z",
-    "a216ae943fafbccfc2e256ddf2e4389d1c7b1e3d7956e7d010f530d7e3b7fe6b": "2026-04-09T08:13:34.943Z"
+    "a216ae943fafbccfc2e256ddf2e4389d1c7b1e3d7956e7d010f530d7e3b7fe6b": "2026-04-09T08:13:34.943Z",
+    "a800b028efeed5c9e81576de40c345198224d2cf8aff4f84ae0568a81d7cc20b": "2026-04-09T08:13:38.917Z"
   },
   "jours": {
     "2026-04-07": {
@@ -503,14 +504,15 @@
       }
     },
     "2026-04-09": {
-      "visitesTotales": 6,
-      "visiteursUniquesEstimes": 5,
+      "visitesTotales": 7,
+      "visiteursUniquesEstimes": 6,
       "visiteurs": {
         "de94e23121fceba05ed56bdd0fa90cb16333ad3a161782b183eea659f0f64512": "2026-04-09T01:50:43.519Z",
         "6003cceb38f351df58ba234cc78c16e3ad71df55f2c9459bf456521d5f9d3b6d": "2026-04-09T07:55:06.041Z",
         "f8a25f8bdb489f3b15b3cfb0d526f1699f27511063ee50cd7a10c633590be555": "2026-04-09T07:55:07.274Z",
         "4ed36a50499d615ff2b1f4b2e39027d52e2119b6dce9736fc18b6adb46b3b78c": "2026-04-09T07:55:35.786Z",
-        "a216ae943fafbccfc2e256ddf2e4389d1c7b1e3d7956e7d010f530d7e3b7fe6b": "2026-04-09T08:13:34.943Z"
+        "a216ae943fafbccfc2e256ddf2e4389d1c7b1e3d7956e7d010f530d7e3b7fe6b": "2026-04-09T08:13:34.943Z",
+        "a800b028efeed5c9e81576de40c345198224d2cf8aff4f84ae0568a81d7cc20b": "2026-04-09T08:13:38.917Z"
       }
     }
   }
