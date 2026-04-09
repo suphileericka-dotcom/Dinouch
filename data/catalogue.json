@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775697233571",
+    "nom": "Sac foure tout",
+    "prix": 6000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775697227/oy7gts2aoyv3a00j3pgg.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Yogodlns Sac fourre-tout tressé ajouré, sac de plage style bohème, sac fourre-tout ajouré, sac de plage ample à grande capacité, sac de plage décontracté de shopping, sac fourre-tout à fleurs au crochet à grande capacité, sac fourre-tout mode, sac de voyage extérieur, parfait pour assortir à un ensemble au crochet, indispensable pour les vacances, parfait pour assortir aux accessoires de plage, sac de plage le plus populaire pour femmes, nécessité de plage, essentiel de plage, fournitures de plage et indispensables d'été, dernier sac de vacances à la mode, tenue de style bohème pour femmes",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775696553152",
     "nom": "Chemise masculine",
     "prix": 10500,
