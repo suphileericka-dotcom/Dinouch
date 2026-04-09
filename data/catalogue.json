@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775698069075",
+    "nom": "Sac à main rouge vernisé",
+    "prix": 7800,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775698059/qcadhebttynjuohub2lt.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Sac à bandoulière asymétrique brillant de couleur unie à la mode, polyvalent, sac à rabat minimaliste élégant, convenant pour le shopping, le rangement du portefeuille, les jeunes femmes, les étudiantes, les jeunes professionnels, les employés de bureau. Convient également pour le bureau, l'université, le travail, les affaires, les déplacements, les activités de plein air, les voyages et les excursions.",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775697896188",
     "nom": "Sac à main rouge",
     "prix": 12000,
