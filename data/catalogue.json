@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775693651654",
+    "nom": "Robe moulante",
+    "prix": 7000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775693606/bd3zmd7tbvo6nqfzvt0q.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Robe moulante marron ou grise ou noire",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775693252793",
     "nom": "Robe  à manches longues",
     "prix": 9600,
