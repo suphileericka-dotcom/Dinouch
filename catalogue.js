@@ -120,6 +120,10 @@
         return catalogue.map(normaliserProduit);
     }
 
+    function produitEstPublie(produit) {
+        return Boolean(String(produit?.image || "").trim());
+    }
+
     function lireCatalogueLocal() {
         const catalogue = lireJson(CLE_CATALOGUE, null);
         if (!Array.isArray(catalogue)) {
@@ -133,6 +137,7 @@
         const catalogueNormalise = normaliserCatalogue(catalogue);
         catalogueEnMemoire = catalogueNormalise;
         enregistrerJson(CLE_CATALOGUE, catalogueNormalise);
+        synchroniserPanierAvecCatalogue(catalogueNormalise);
         return catalogueNormalise;
     }
 
@@ -214,6 +219,10 @@
         return clonerCatalogue(catalogueEnMemoire);
     }
 
+    function lireCataloguePublie() {
+        return lireCatalogue().filter(produitEstPublie);
+    }
+
     function lireStatutStockage() {
         return { ...statutStockage };
     }
@@ -231,7 +240,7 @@
     }
 
     function trouverProduitParId(idProduit) {
-        return lireCatalogue().find((produit) => produit.id === idProduit) || null;
+        return lireCataloguePublie().find((produit) => produit.id === idProduit) || null;
     }
 
     async function ajouterAuCatalogue(produit) {
@@ -381,6 +390,20 @@
 
     function enregistrerPanier(panier) {
         enregistrerJson(CLE_PANIER, panier);
+    }
+
+    function synchroniserPanierAvecCatalogue(catalogue) {
+        const idsPublies = new Set(
+            normaliserCatalogue(catalogue)
+                .filter(produitEstPublie)
+                .map((produit) => produit.id)
+        );
+        const panier = lirePanier();
+        const panierFiltre = panier.filter((produit) => idsPublies.has(produit.id));
+
+        if (panierFiltre.length !== panier.length) {
+            enregistrerPanier(panierFiltre);
+        }
     }
 
     function ajouterAuPanier(entree, tailleChoisie) {
@@ -552,9 +575,11 @@
         PRODUITS_PAR_PAGE,
         initialiserCatalogue,
         lireCatalogue,
+        lireCataloguePublie,
         lireStatutStockage,
         publicationPartageeDisponible,
         lireMessagePublicationIndisponible,
+        produitEstPublie,
         trouverProduitParId,
         ajouterAuCatalogue,
         supprimerProduit,

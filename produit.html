@@ -150,7 +150,7 @@
             await window.DINOUCH.initialiserCatalogue();
             produit = idProduitDemande
                 ? window.DINOUCH.trouverProduitParId(idProduitDemande)
-                : window.DINOUCH.lireCatalogue()[0] || null;
+                : window.DINOUCH.lireCataloguePublie()[0] || null;
             afficherProduit();
         }
 

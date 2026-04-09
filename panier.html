@@ -77,8 +77,6 @@
     </nav>
 
     <script>
-        window.DINOUCH.initialiserCatalogue();
-
         const listePanier = document.getElementById("liste-panier");
         const messagePanierVide = document.getElementById("message-panier-vide");
         const totalPanier = document.getElementById("total-panier");
@@ -151,7 +149,12 @@
             }, 1000);
         });
 
-        afficherPanier();
+        async function demarrerPanier() {
+            await window.DINOUCH.initialiserCatalogue();
+            afficherPanier();
+        }
+
+        demarrerPanier();
     </script>
 </body>
 </html>

@@ -94,7 +94,7 @@
         }
 
         function afficherProduits() {
-            const catalogue = window.DINOUCH.lireCatalogue();
+            const catalogue = window.DINOUCH.lireCataloguePublie();
             const totalPages = Math.max(1, Math.ceil(catalogue.length / window.DINOUCH.PRODUITS_PAR_PAGE));
             pageCourante = Math.min(pageCourante, totalPages);
 
@@ -149,7 +149,7 @@
         });
 
         boutonSuivant.addEventListener("click", () => {
-            const totalPages = Math.max(1, Math.ceil(window.DINOUCH.lireCatalogue().length / window.DINOUCH.PRODUITS_PAR_PAGE));
+            const totalPages = Math.max(1, Math.ceil(window.DINOUCH.lireCataloguePublie().length / window.DINOUCH.PRODUITS_PAR_PAGE));
             if (pageCourante < totalPages) {
                 pageCourante += 1;
                 afficherProduits();

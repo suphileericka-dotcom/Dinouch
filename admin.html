@@ -114,16 +114,16 @@
                 <div class="flex items-center justify-between gap-3">
                     <div>
                         <p class="text-[10px] uppercase tracking-[0.3em] text-[#9e9d9a]">Suppression des articles</p>
-                        <h2 class="mt-2 text-xl font-black text-[#615e5c]" style="font-family: 'Epilogue', sans-serif;">Articles avec photo</h2>
+                        <h2 class="mt-2 text-xl font-black text-[#615e5c]" style="font-family: 'Epilogue', sans-serif;">Tous les articles</h2>
                     </div>
-                    <span id="compteur-photos" class="rounded-full bg-[#fcf4eb] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#705b44]">0 photo</span>
+                    <span id="compteur-photos" class="rounded-full bg-[#fcf4eb] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#705b44]">0 article</span>
                 </div>
                 <p class="mt-3 text-xs leading-5 text-[#8d8882]">
-                    Cette action retire l'article du site. Le fichier envoye sur Cloudinary n'est pas supprime.
+                    Cette action retire completement l'article du site. Les articles sans photo sont caches sur la boutique publique, mais restent supprimables ici.
                 </p>
 
                 <div id="liste-photos" class="mt-4 max-h-[360px] space-y-3 overflow-y-auto pr-1">
-                    <div class="rounded-2xl bg-[#fcf9f6] p-5 text-sm text-[#8d8882]">Aucune photo n'est disponible pour le moment.</div>
+                    <div class="rounded-2xl bg-[#fcf9f6] p-5 text-sm text-[#8d8882]">Aucun article n'est disponible pour le moment.</div>
                 </div>
             </div>
         </aside>
@@ -352,21 +352,28 @@
 
         function afficherGestionPhotos() {
             const catalogue = window.DINOUCH.lireCatalogue();
-            const produitsAvecPhoto = catalogue.filter((produit) => produit.image);
-            compteurPhotos.textContent = produitsAvecPhoto.length > 1 ? produitsAvecPhoto.length + " photos" : produitsAvecPhoto.length + " photo";
+            compteurPhotos.textContent = catalogue.length > 1 ? catalogue.length + " articles" : catalogue.length + " article";
 
-            if (!produitsAvecPhoto.length) {
-                listePhotos.innerHTML = '<div class="rounded-2xl bg-[#fcf9f6] p-5 text-sm text-[#8d8882]">Aucune photo n\'est disponible pour le moment.</div>';
+            if (!catalogue.length) {
+                listePhotos.innerHTML = '<div class="rounded-2xl bg-[#fcf9f6] p-5 text-sm text-[#8d8882]">Aucun article n\'est disponible pour le moment.</div>';
                 return;
             }
 
-            listePhotos.innerHTML = produitsAvecPhoto.map((produit) => {
+            listePhotos.innerHTML = catalogue.map((produit) => {
+                const image = produit.image
+                    ? `<img src="${window.DINOUCH.echapperTexte(produit.image)}" alt="${window.DINOUCH.echapperTexte(produit.nom)}" class="h-16 w-16 rounded-xl object-cover">`
+                    : '<div class="flex h-16 w-16 items-center justify-center rounded-xl bg-[#f0eee9] text-[10px] font-bold uppercase tracking-[0.2em] text-[#9e9d9a]">Photo</div>';
+                const statutPhoto = produit.image
+                    ? ""
+                    : '<p class="mt-1 text-[11px] text-amber-600">Sans photo: cet article est masque sur la boutique.</p>';
+
                 return `
                     <article class="flex items-center gap-3 rounded-2xl border border-black/5 bg-[#fcf9f6] p-3">
-                        <img src="${window.DINOUCH.echapperTexte(produit.image)}" alt="${window.DINOUCH.echapperTexte(produit.nom)}" class="h-16 w-16 rounded-xl object-cover">
+                        ${image}
                         <div class="min-w-0 flex-1">
                             <h3 class="truncate text-sm font-bold text-[#32332f]">${window.DINOUCH.echapperTexte(produit.nom)}</h3>
                             <p class="mt-1 text-[11px] text-[#8d8882]">${window.DINOUCH.formaterPrix(produit.prix)}</p>
+                            ${statutPhoto}
                         </div>
                         <button type="button" data-retirer-photo="${window.DINOUCH.echapperTexte(produit.id)}" class="rounded-full border border-red-200 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-red-400 transition hover:bg-red-50">
                             Supprimer
@@ -422,6 +429,11 @@
 
             if (!nom || !prix) {
                 messageAdmin.textContent = "Ajoutez au minimum un nom et un prix.";
+                return;
+            }
+
+            if (!urlPhoto.value.trim()) {
+                messageAdmin.textContent = "Ajoutez une photo avant de publier l'article.";
                 return;
             }
 
