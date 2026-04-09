@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775696438296",
+    "nom": "Chemise homme",
+    "prix": 10500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775696431/n7lcgvxuadadm3pfdjxs.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "PAVTROS T-shirt à manches courtes avec badge rayé pour hommes, style court, dégageant une ambiance streetwear, idéal pour le petit ami ou l'ami pour une tenue streetwear",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775696120869",
     "nom": "Ensemble homme",
     "prix": 14000,
