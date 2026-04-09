@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775695163129",
+    "nom": "Ensemble chemise et pantalon femme",
+    "prix": 20000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775695141/gfieobsnbmo376xfilnb.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Siren Gaze Ensemble chemise froncée et pantalon large pattes d'éléphant de couleur unie, nouvelle collection automne pour femmes Disponible en rouge , rose , violet , kaki, gris",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775694826710",
     "nom": "Bonnet tribe",
     "prix": 4800,
