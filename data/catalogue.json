@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775695410650",
+    "nom": "Marque MUCHICA ensemble jogging et T-Shirt",
+    "prix": 18000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775695383/mnsetzwhinpfolnvszil.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Muchica Ensemble 2 pièces casual pour femmes avec t-shirt à col rond à manches courtes à rayures et patchwork, et pantalon large",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775695163129",
     "nom": "Ensemble chemise et pantalon femme",
     "prix": 20000,
