@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775697896188",
+    "nom": "Sac à main rouge",
+    "prix": 12000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775697887/opt0xzc8a5rjqkbbiq3x.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Nouveau sac à main mode en PU de couleur unie style clown, imperméable, avec décoration graphique de lettres, fermeture à glissière, sac fourre-tout carré, sac à main bordeaux avec décoration de pendentif, bandoulière réglable, convient pour le shopping, sac bordeaux , essentiel pour le Nouvel An",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775697564032",
     "nom": "Mini sac à main",
     "prix": 9000,
