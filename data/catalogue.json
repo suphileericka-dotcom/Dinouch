@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775696120869",
+    "nom": "Ensemble homme",
+    "prix": 14000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775696112/bpcsgq856fsvrfnjqodq.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Ensemble cullote teeshirt homme meilleur en saison de pluie",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775695904452",
     "nom": "Ensemble sexy girl",
     "prix": 18500,
