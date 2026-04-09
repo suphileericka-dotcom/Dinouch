@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775696553152",
+    "nom": "Chemise masculine",
+    "prix": 10500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775696537/apy0nlpn3vs2meqec32r.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "SWAVVY Chemise courte ample de style décontracté pour homme, motif à carreaux et imprimé anglais avec effet de cire coulante",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775696438296",
     "nom": "Chemise homme",
     "prix": 10500,
