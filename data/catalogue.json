@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775694826710",
+    "nom": "Bonnet tribe",
+    "prix": 4800,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775694800/xhg897slfqbij0s35gdn.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "1 pièce Bonnet unisexe en nylon de style de rue avec imprimé crâne de couleur unie, convenant pour toutes les saisons, les sports et les tenues décontractées, excellent choix de cadeau",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775694558433",
     "nom": "Teeshirt one pièce",
     "prix": 9000,
