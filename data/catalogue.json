@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775697426038",
+    "nom": "Mini sac à main vernisé",
+    "prix": 6000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775697419/e36miblehcxyjrzurbc8.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Sac à bandoulière rétro pour femmes en faux avec rabat décoratif, convient pour les rendez-vous, les sorties, les fêtes et autres occasions Disponible en noi rouge marron",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775697233571",
     "nom": "Sac foure tout",
     "prix": 6000,
