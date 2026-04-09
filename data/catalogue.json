@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1775693252793",
+    "nom": "Robe  à manches longues",
+    "prix": 9600,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775693221/swnbg6jsvm71tb6itsel.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Robe  à manches longues et col en U unie pour femme en coton",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775657546734",
     "nom": "Collier de taille",
     "prix": 4500,
