@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1775698233640",
+    "nom": "Sac à main classique",
+    "prix": 9000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1775698225/iugj9a5bp5jwhwxeaz8u.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "SHEIN SXY Sacs à main pour femmes avec poignée supérieure, paillettes, mode, simple, élégant, polyvalent, classique, rouge, pour le classique, les rendez-vous, le quotidien, les courses, le thé de l'après-midi, les fêtes, le bal de promo, le club, l'anniversaire, le soir, les sorties, les bals",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775698166179",
     "nom": "Sac à main rouge bordeaux",
     "prix": 9000,
