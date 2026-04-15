@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1776284678119",
+    "nom": "bracelet personnalisé homme",
+    "prix": 4500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1776284505/dfz0leiiekzlhmyjuyoq.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "bracelet réalisé avec ton prénom comme tu le veux . que tu aies une main fine ou grosse contacte nous !",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1775699188025",
     "nom": "Cache téton 100pieces",
     "prix": 4000,
