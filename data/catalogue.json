@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1776328034549",
+    "nom": "Ensemble jogging",
+    "prix": 19000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1776327997/mxnlr51beo5odfgchpac.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Muchica Ensemble 2 pièces composé d'un t-shirt à manches courtes moulant imprimé de pois et d'un pantalon de survêtement ample, nouveau pour l'été",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1776327938314",
     "nom": "Ensemble femme",
     "prix": 15000,
