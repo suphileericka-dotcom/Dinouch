@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1776327439977",
+    "nom": "Ensemble jogging",
+    "prix": 18500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1776327404/znxikyerdhilyd2xk3gm.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Muchica 2 pièces/Set Femmes Débardeur de sport rose et pantalon à taille élastique avec broderie de lettre",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1776327154286",
     "nom": "Ensemble femme sexy",
     "prix": 17500,
