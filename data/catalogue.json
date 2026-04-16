@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1776328452885",
+    "nom": "Bonnet unitaire",
+    "prix": 3500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1776328419/oilgkwxnqz63j0xzzgdu.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Bonnet pour homme ou femme de plusieurs couleur à la mode",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1776328034549",
     "nom": "Ensemble jogging",
     "prix": 19000,
