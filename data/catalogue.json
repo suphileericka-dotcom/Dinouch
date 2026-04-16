@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1776327154286",
+    "nom": "Ensemble femme sexy",
+    "prix": 17500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1776327108/yx5axqtp9i4qcu9yfeoo.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Radiana 2 pièces/set Ensemble décontracté de haute qualité, t-shirt à col ras du cou à manches courtes ajusté avec imprimé lettres marron café et pantalon évasé à taille basse. Convient pour les activités décontractées, les sports, le fitness, le yoga, la course, le tennis, le badminton, la danse, le cyclisme. Ensemble marron 2 pièces pour femmes",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1776284678119",
     "nom": "bracelet personnalisé homme",
     "prix": 4500,
