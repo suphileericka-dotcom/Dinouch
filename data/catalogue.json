@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1776330520396",
+    "nom": "Bonnet unique",
+    "prix": 4500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1776330488/npezeufifyh50ipvsfzr.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Bonnet unique",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1776330470048",
     "nom": "Bonnet",
     "prix": 4500,
