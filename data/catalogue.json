@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1776327938314",
+    "nom": "Ensemble femme",
+    "prix": 15000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1776327928/y3xcwktbd0ermrdsvarn.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Muchica Ensemble casual de Top en tricot et pantalon couleur abricot pour femme",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1776327621188",
     "nom": "Ensemble femme",
     "prix": 18000,
