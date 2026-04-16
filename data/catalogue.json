@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1776330587707",
+    "nom": "Bonnet unique",
+    "prix": 4500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1776330568/gsd2hy67b2rsir75yvze.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Bonnet tricoté",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1776330520396",
     "nom": "Bonnet unique",
     "prix": 4500,
