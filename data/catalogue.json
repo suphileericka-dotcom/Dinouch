@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1776351135592",
+    "nom": "Bonnet unique",
+    "prix": 4500,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1776351119/onylsazwrvsjrhrtb3fb.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Une nouvelle piece ajoutee a la boutique DINOUCH.",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1776351053856",
     "nom": "Bonnet street",
     "prix": 4000,
