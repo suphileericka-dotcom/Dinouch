@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1776351053856",
+    "nom": "Bonnet street",
+    "prix": 4000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1776351026/hojo1iqwmaivy9lxypws.jpg",
+    "tailles": [
+      "Unique"
+    ],
+    "vues": 0,
+    "description": "Bonnet street",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1776330925710",
     "nom": "Bonnet",
     "prix": 4000,
