@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1776327621188",
+    "nom": "Ensemble femme",
+    "prix": 18000,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1776327610/hwcgb9l6milnfkpg6yqz.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "Muchica Ensemble décontracté d'été pour femmes, nouveau débardeur noir et pantalon bouffant. Convient pour les sorties, le streetwear, le style Y2K",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1776327439977",
     "nom": "Ensemble jogging",
     "prix": 18500,
