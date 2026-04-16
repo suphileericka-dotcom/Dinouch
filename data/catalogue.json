@@ -1,5 +1,20 @@
 [
   {
+    "id": "dinouch-1776330712296",
+    "nom": "Ensemble femme satin",
+    "prix": 16800,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1776330636/oolmasuf2gznztkdqrai.jpg",
+    "tailles": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "vues": 0,
+    "description": "En satin haut et le bas",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1776330587707",
     "nom": "Bonnet unique",
     "prix": 4500,
