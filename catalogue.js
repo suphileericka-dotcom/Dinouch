@@ -422,6 +422,7 @@
             visiteursUniquesEstimes: Math.max(0, Number(statistiques?.visiteursUniquesEstimes) || 0),
             derniereVisite: String(statistiques?.derniereVisite || ""),
             fuseauHoraire: String(statistiques?.fuseauHoraire || "UTC"),
+            historiqueLimite: Math.max(0, Number(statistiques?.historiqueLimite) || 0),
             jourActuel: {
                 date: String(jourActuel.date || ""),
                 visitesTotales: Math.max(0, Number(jourActuel.visitesTotales) || 0),

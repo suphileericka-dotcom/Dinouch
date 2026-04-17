@@ -94,12 +94,33 @@
                         <p class="text-[10px] uppercase tracking-[0.22em] text-[#9e9d9a]">Visites aujourd'hui</p>
                         <p id="compteur-visites" class="mt-2 text-2xl font-black text-[#32332f]">0</p>
                     </div>
+                    <div class="rounded-2xl bg-white p-4">
+                        <p class="text-[10px] uppercase tracking-[0.22em] text-[#9e9d9a]">Visiteurs hier</p>
+                        <p id="compteur-visiteurs-hier" class="mt-2 text-2xl font-black text-[#32332f]">0</p>
+                    </div>
+                    <div class="rounded-2xl bg-white p-4">
+                        <p class="text-[10px] uppercase tracking-[0.22em] text-[#9e9d9a]">Visites hier</p>
+                        <p id="compteur-visites-hier" class="mt-2 text-2xl font-black text-[#32332f]">0</p>
+                    </div>
                 </div>
 
                 <div class="mt-4 rounded-2xl bg-white p-4">
-                    <p class="text-[10px] uppercase tracking-[0.22em] text-[#9e9d9a]">Derniers jours</p>
-                    <div id="liste-visites-jours" class="mt-3 space-y-2">
-                        <p class="text-xs leading-5 text-[#8d8882]">Aucune journee de visite n'a encore ete enregistree.</p>
+                    <div class="flex items-start justify-between gap-3">
+                        <div>
+                            <p class="text-[10px] uppercase tracking-[0.22em] text-[#9e9d9a]">Derniers jours</p>
+                            <p id="resume-historique-visites" class="mt-1 text-xs leading-5 text-[#8d8882]">
+                                Les statistiques gardent seulement les derniers jours utiles.
+                            </p>
+                        </div>
+                        <button type="button" id="bouton-basculer-historique" aria-expanded="false" class="inline-flex items-center gap-1 rounded-full border border-black/5 bg-[#fcf9f6] px-3 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-[#705b44] transition hover:bg-[#f7f0e8]">
+                            <span id="texte-bouton-historique">Afficher</span>
+                            <span id="icone-bouton-historique" class="material-symbols-outlined text-base">expand_more</span>
+                        </button>
+                    </div>
+                    <div id="conteneur-historique-visites" class="mt-3 hidden">
+                        <div id="liste-visites-jours" class="space-y-2">
+                            <p class="text-xs leading-5 text-[#8d8882]">Aucune journee de visite n'a encore ete enregistree.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -159,15 +180,24 @@
         const boutonPublier = formulaireProduit.querySelector('button[type="submit"]');
         const compteurVisiteurs = document.getElementById("compteur-visiteurs");
         const compteurVisites = document.getElementById("compteur-visites");
+        const compteurVisiteursHier = document.getElementById("compteur-visiteurs-hier");
+        const compteurVisitesHier = document.getElementById("compteur-visites-hier");
         const listeVisitesJours = document.getElementById("liste-visites-jours");
+        const conteneurHistoriqueVisites = document.getElementById("conteneur-historique-visites");
+        const boutonBasculerHistorique = document.getElementById("bouton-basculer-historique");
+        const texteBoutonHistorique = document.getElementById("texte-bouton-historique");
+        const iconeBoutonHistorique = document.getElementById("icone-bouton-historique");
+        const resumeHistoriqueVisites = document.getElementById("resume-historique-visites");
         const derniereVisite = document.getElementById("derniere-visite");
         const statutVisites = document.getElementById("statut-visites");
         const modeFormulaire = document.getElementById("mode-formulaire");
         const aideFormulaire = document.getElementById("aide-formulaire");
         const boutonAnnulerEdition = document.getElementById("bouton-annuler-edition");
         const casesTailles = Array.from(document.querySelectorAll('input[name="tailles"]'));
+        const NOMBRE_JOURS_HISTORIQUE_PAR_DEFAUT = 7;
 
         let idProduitEdition = "";
+        let historiqueVisitesOuvert = false;
 
         async function deconnexion() {
             await window.DINOUCH.fermerSessionAdmin();
@@ -293,6 +323,23 @@
             ].join("-");
         }
 
+        function trouverStatistiquesJour(historique, cleJour) {
+            return historique.find((statistiquesJour) => statistiquesJour.date === cleJour) || null;
+        }
+
+        function mettreAJourAffichageHistoriqueVisites(forceOuvert) {
+            if (typeof forceOuvert === "boolean") {
+                historiqueVisitesOuvert = forceOuvert;
+            } else {
+                historiqueVisitesOuvert = !historiqueVisitesOuvert;
+            }
+
+            conteneurHistoriqueVisites.classList.toggle("hidden", !historiqueVisitesOuvert);
+            boutonBasculerHistorique.setAttribute("aria-expanded", historiqueVisitesOuvert ? "true" : "false");
+            texteBoutonHistorique.textContent = historiqueVisitesOuvert ? "Replier" : "Afficher";
+            iconeBoutonHistorique.textContent = historiqueVisitesOuvert ? "expand_less" : "expand_more";
+        }
+
         function formaterLibelleJour(cleJour, cleJourActuel) {
             if (!/^\d{4}-\d{2}-\d{2}$/.test(cleJour)) {
                 return "Jour inconnu";
@@ -345,23 +392,33 @@
         async function afficherStatistiquesVisites() {
             compteurVisiteurs.textContent = "0";
             compteurVisites.textContent = "0";
+            compteurVisiteursHier.textContent = "0";
+            compteurVisitesHier.textContent = "0";
             listeVisitesJours.innerHTML = '<p class="text-xs leading-5 text-[#8d8882]">Chargement des statistiques journalieres...</p>';
+            resumeHistoriqueVisites.textContent = "Chargement de l'historique recent...";
             statutVisites.textContent = "Lecture";
             derniereVisite.textContent = "Chargement des statistiques...";
 
             try {
                 const resultat = await window.DINOUCH.lireStatistiquesSite();
                 const statistiques = resultat.statistiques;
+                const historique = Array.isArray(statistiques.historiqueJournalier)
+                    ? statistiques.historiqueJournalier
+                    : [];
+                const cleJourActuel = String(statistiques?.jourActuel?.date || "");
+                const statistiquesHier = trouverStatistiquesJour(historique, cleJourPrecedent(cleJourActuel));
+                const limiteHistorique = Number(statistiques?.historiqueLimite) || NOMBRE_JOURS_HISTORIQUE_PAR_DEFAUT;
 
                 compteurVisiteurs.textContent = formaterNombre(statistiques.jourActuel.visiteursUniquesEstimes);
                 compteurVisites.textContent = formaterNombre(statistiques.jourActuel.visitesTotales);
+                compteurVisiteursHier.textContent = formaterNombre(statistiquesHier?.visiteursUniquesEstimes || 0);
+                compteurVisitesHier.textContent = formaterNombre(statistiquesHier?.visitesTotales || 0);
                 afficherHistoriqueJournalier(statistiques);
+                resumeHistoriqueVisites.textContent = historique.length
+                    ? "Historique recent limite a " + limiteHistorique + " jours pour eviter que la liste et le stockage grossissent."
+                    : "Les statistiques garderont au maximum " + limiteHistorique + " jours.";
                 derniereVisite.textContent = formaterDerniereVisite(statistiques.derniereVisite)
-                    + " Cumul : "
-                    + formaterNombre(statistiques.visitesTotales)
-                    + " visites, "
-                    + formaterNombre(statistiques.visiteursUniquesEstimes)
-                    + " visiteurs estimes. Fuseau : "
+                    + " Fuseau : "
                     + (statistiques.fuseauHoraire || "Europe/Paris")
                     + ".";
 
@@ -379,6 +436,7 @@
             } catch (erreur) {
                 statutVisites.textContent = "Indispo";
                 listeVisitesJours.innerHTML = '<p class="text-xs leading-5 text-[#8d8882]">Impossible de charger le detail journalier.</p>';
+                resumeHistoriqueVisites.textContent = "Impossible de charger l'historique recent.";
                 derniereVisite.textContent = erreur.message || "Impossible de charger les statistiques de visite.";
             }
         }
@@ -499,6 +557,10 @@
             messageAdmin.textContent = "Le service d'upload n'est pas disponible pour le moment.";
         });
 
+        boutonBasculerHistorique.addEventListener("click", () => {
+            mettreAJourAffichageHistoriqueVisites();
+        });
+
         boutonAnnulerEdition.addEventListener("click", () => {
             reinitialiserFormulaire();
             messageAdmin.textContent = "Edition annulee. Vous pouvez publier un nouvel article.";
@@ -610,6 +672,7 @@
 
             await window.DINOUCH.initialiserCatalogue();
             await afficherStatistiquesVisites();
+            mettreAJourAffichageHistoriqueVisites(false);
             afficherStatutSynchronisation();
             reinitialiserFormulaire();
             afficherArticlesRecents();
