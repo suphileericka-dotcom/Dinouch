@@ -102,6 +102,40 @@ export async function POST(request) {
             });
         }
 
+        if (donnees.action === "update") {
+            const produitRecu = donnees.produit || {};
+            const idProduit = String(produitRecu.id || "");
+            const indexProduit = catalogue.findIndex((produit) => produit.id === idProduit);
+
+            if (indexProduit === -1) {
+                return reponseJson({
+                    message: "Article introuvable."
+                }, 404);
+            }
+
+            const produitActuel = catalogue[indexProduit];
+            const produitMisAJour = normaliserProduit({
+                ...produitActuel,
+                ...produitRecu,
+                id: produitActuel.id,
+                vues: produitActuel.vues,
+                estExemple: false
+            }, indexProduit);
+            const prochainCatalogue = [...catalogue];
+
+            prochainCatalogue.splice(indexProduit, 1, produitMisAJour);
+
+            const resultat = await enregistrerCataloguePartage(prochainCatalogue, `Mettre a jour ${produitMisAJour.nom}`);
+            return reponseJson({
+                catalogue: resultat.catalogue,
+                produit: produitMisAJour,
+                shared: true,
+                writable: true,
+                storage: resultat.storage,
+                message: ""
+            });
+        }
+
         return reponseJson({
             message: "Action inconnue."
         }, 400);

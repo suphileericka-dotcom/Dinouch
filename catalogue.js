@@ -296,6 +296,67 @@
         }
     }
 
+    async function mettreAJourProduit(produit) {
+        await initialiserCatalogue();
+
+        try {
+            const donnees = await lireJsonApi("/api/catalogue", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                },
+                body: JSON.stringify({
+                    action: "update",
+                    produit
+                })
+            });
+
+            statutStockage = {
+                shared: Boolean(donnees.shared),
+                writable: Boolean(donnees.writable),
+                storage: String(donnees.storage || "github"),
+                message: String(donnees.message || "")
+            };
+
+            enregistrerCatalogueLocal(donnees.catalogue || []);
+            return normaliserProduit(donnees.produit || produit, 0);
+        } catch (erreur) {
+            if (!mutationLocaleAutorisee()) {
+                if (!statutStockage.writable) {
+                    throw new Error(lireMessagePublicationIndisponible());
+                }
+
+                throw erreur;
+            }
+
+            const catalogueActuel = lireCatalogue();
+            const indexProduit = catalogueActuel.findIndex((produitCatalogue) => produitCatalogue.id === produit.id);
+
+            if (indexProduit === -1) {
+                throw new Error("Article introuvable.");
+            }
+
+            const produitActuel = catalogueActuel[indexProduit];
+            const produitMisAJour = normaliserProduit({
+                ...produitActuel,
+                ...produit,
+                id: produitActuel.id,
+                vues: produitActuel.vues,
+                estExemple: false
+            }, indexProduit);
+
+            catalogueActuel.splice(indexProduit, 1, produitMisAJour);
+            enregistrerCatalogueLocal(catalogueActuel);
+            statutStockage = {
+                shared: false,
+                writable: true,
+                storage: "local",
+                message: "Modification locale uniquement."
+            };
+            return produitMisAJour;
+        }
+    }
+
     async function supprimerProduit(idProduit) {
         await initialiserCatalogue();
 
@@ -392,16 +453,39 @@
         enregistrerJson(CLE_PANIER, panier);
     }
 
+    function tailleDisponiblePourProduit(taille, produit) {
+        const tailles = Array.isArray(produit?.tailles) && produit.tailles.length
+            ? produit.tailles.map((valeur) => String(valeur))
+            : ["Unique"];
+        const tailleDemandee = String(taille || "");
+
+        return tailles.includes(tailleDemandee) ? tailleDemandee : tailles[0];
+    }
+
     function synchroniserPanierAvecCatalogue(catalogue) {
-        const idsPublies = new Set(
-            normaliserCatalogue(catalogue)
-                .filter(produitEstPublie)
-                .map((produit) => produit.id)
+        const produitsPublies = normaliserCatalogue(catalogue).filter(produitEstPublie);
+        const produitsParId = new Map(
+            produitsPublies.map((produit) => [produit.id, produit])
         );
         const panier = lirePanier();
-        const panierFiltre = panier.filter((produit) => idsPublies.has(produit.id));
+        const panierFiltre = panier.reduce((accumulateur, entreePanier) => {
+            const produitActuel = produitsParId.get(String(entreePanier?.id || ""));
 
-        if (panierFiltre.length !== panier.length) {
+            if (!produitActuel) {
+                return accumulateur;
+            }
+
+            accumulateur.push({
+                id: produitActuel.id,
+                nom: produitActuel.nom,
+                prix: Number(produitActuel.prix) || 0,
+                image: produitActuel.image || "",
+                taille: tailleDisponiblePourProduit(entreePanier?.taille, produitActuel)
+            });
+            return accumulateur;
+        }, []);
+
+        if (JSON.stringify(panierFiltre) !== JSON.stringify(panier)) {
             enregistrerPanier(panierFiltre);
         }
     }
@@ -422,6 +506,85 @@
         });
         enregistrerPanier(panier);
         return panier;
+    }
+
+    function resumerPanier(panier) {
+        const lignes = [];
+        const regroupement = new Map();
+
+        panier.forEach((entreePanier) => {
+            const produit = trouverProduitParId(String(entreePanier?.id || ""));
+
+            if (!produit) {
+                return;
+            }
+
+            const taille = tailleDisponiblePourProduit(entreePanier?.taille, produit);
+            const cle = `${produit.id}::${taille}`;
+            const ligneExistante = regroupement.get(cle);
+
+            if (ligneExistante) {
+                ligneExistante.quantite += 1;
+                return;
+            }
+
+            const ligne = {
+                id: produit.id,
+                nom: produit.nom,
+                taille,
+                quantite: 1
+            };
+
+            regroupement.set(cle, ligne);
+            lignes.push(ligne);
+        });
+
+        return lignes;
+    }
+
+    function decrirePanierPourPartage(panier = lirePanier()) {
+        const lignes = resumerPanier(panier);
+
+        if (!lignes.length) {
+            return "Panier DINOUCH";
+        }
+
+        const apercu = lignes.slice(0, 3).map((ligne) => {
+            const prefixeQuantite = ligne.quantite > 1 ? `${ligne.quantite} x ` : "";
+            return `${prefixeQuantite}${ligne.nom} (${ligne.taille})`;
+        }).join(", ");
+        const articlesRestants = lignes.length - Math.min(lignes.length, 3);
+
+        return articlesRestants > 0
+            ? `${apercu}, +${articlesRestants} autre(s)`
+            : apercu;
+    }
+
+    function creerLienPartagePanier() {
+        const panier = lirePanier();
+        const origine = String(window.location.origin || "");
+
+        if (!panier.length || !/^https?:/i.test(origine)) {
+            return "";
+        }
+
+        const lignes = resumerPanier(panier);
+
+        if (!lignes.length) {
+            return "";
+        }
+
+        const urlPartage = new URL("/api/panier-share", origine);
+        const items = lignes.map((ligne) => {
+            return [
+                encodeURIComponent(ligne.id),
+                encodeURIComponent(ligne.taille),
+                String(Math.max(1, Number(ligne.quantite) || 1))
+            ].join("::");
+        }).join(",");
+
+        urlPartage.searchParams.set("items", items);
+        return urlPartage.toString();
     }
 
     function retirerDuPanier(index) {
@@ -582,6 +745,7 @@
         produitEstPublie,
         trouverProduitParId,
         ajouterAuCatalogue,
+        mettreAJourProduit,
         supprimerProduit,
         formaterPrix,
         echapperTexte,
@@ -590,6 +754,8 @@
         ajouterAuPanier,
         retirerDuPanier,
         viderPanier,
+        decrirePanierPourPartage,
+        creerLienPartagePanier,
         enregistrerVisiteSite,
         lireStatistiquesSite,
         verifierSessionAdmin,
