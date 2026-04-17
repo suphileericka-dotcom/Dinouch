@@ -80,27 +80,19 @@
                 <div class="flex items-start justify-between gap-3">
                     <div>
                         <p class="text-[10px] uppercase tracking-[0.3em] text-[#9e9d9a]">Audience</p>
-                        <h2 class="mt-2 text-xl font-black text-[#615e5c]" style="font-family: 'Epilogue', sans-serif;">Visites du site</h2>
+                        <h2 class="mt-2 text-xl font-black text-[#615e5c]" style="font-family: 'Epilogue', sans-serif;">Visiteurs du site</h2>
                     </div>
                     <span id="statut-visites" class="rounded-full bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#705b44]">Lecture</span>
                 </div>
 
-                <div class="mt-5 grid grid-cols-2 gap-3">
+                <div class="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
                     <div class="rounded-2xl bg-white p-4">
                         <p class="text-[10px] uppercase tracking-[0.22em] text-[#9e9d9a]">Visiteurs aujourd'hui</p>
                         <p id="compteur-visiteurs" class="mt-2 text-2xl font-black text-[#32332f]">0</p>
                     </div>
                     <div class="rounded-2xl bg-white p-4">
-                        <p class="text-[10px] uppercase tracking-[0.22em] text-[#9e9d9a]">Visites aujourd'hui</p>
-                        <p id="compteur-visites" class="mt-2 text-2xl font-black text-[#32332f]">0</p>
-                    </div>
-                    <div class="rounded-2xl bg-white p-4">
                         <p class="text-[10px] uppercase tracking-[0.22em] text-[#9e9d9a]">Visiteurs hier</p>
                         <p id="compteur-visiteurs-hier" class="mt-2 text-2xl font-black text-[#32332f]">0</p>
-                    </div>
-                    <div class="rounded-2xl bg-white p-4">
-                        <p class="text-[10px] uppercase tracking-[0.22em] text-[#9e9d9a]">Visites hier</p>
-                        <p id="compteur-visites-hier" class="mt-2 text-2xl font-black text-[#32332f]">0</p>
                     </div>
                 </div>
 
@@ -179,9 +171,7 @@
         const statutSynchronisation = document.getElementById("statut-synchronisation");
         const boutonPublier = formulaireProduit.querySelector('button[type="submit"]');
         const compteurVisiteurs = document.getElementById("compteur-visiteurs");
-        const compteurVisites = document.getElementById("compteur-visites");
         const compteurVisiteursHier = document.getElementById("compteur-visiteurs-hier");
-        const compteurVisitesHier = document.getElementById("compteur-visites-hier");
         const listeVisitesJours = document.getElementById("liste-visites-jours");
         const conteneurHistoriqueVisites = document.getElementById("conteneur-historique-visites");
         const boutonBasculerHistorique = document.getElementById("bouton-basculer-historique");
@@ -375,15 +365,13 @@
             listeVisitesJours.innerHTML = historique.map((statistiquesJour) => {
                 const libelleJour = formaterLibelleJour(statistiquesJour.date, cleJourActuel);
                 const visiteurs = formaterNombre(statistiquesJour.visiteursUniquesEstimes);
-                const visites = formaterNombre(statistiquesJour.visitesTotales);
 
                 return `
-                    <div class="flex items-center justify-between gap-3 rounded-2xl bg-[#fcf9f6] px-3 py-3">
+                    <div class="rounded-2xl bg-[#fcf9f6] px-3 py-3">
                         <div>
                             <p class="text-[11px] font-bold uppercase tracking-[0.18em] text-[#705b44]">${window.DINOUCH.echapperTexte(libelleJour)}</p>
-                            <p class="mt-1 text-xs text-[#8d8882]">${visiteurs} visiteurs estimes</p>
+                            <p class="mt-1 text-sm font-black text-[#32332f]">${visiteurs} visiteur(s)</p>
                         </div>
-                        <p class="text-sm font-black text-[#32332f]">${visites} visites</p>
                     </div>
                 `;
             }).join("");
@@ -391,9 +379,7 @@
 
         async function afficherStatistiquesVisites() {
             compteurVisiteurs.textContent = "0";
-            compteurVisites.textContent = "0";
             compteurVisiteursHier.textContent = "0";
-            compteurVisitesHier.textContent = "0";
             listeVisitesJours.innerHTML = '<p class="text-xs leading-5 text-[#8d8882]">Chargement des statistiques journalieres...</p>';
             resumeHistoriqueVisites.textContent = "Chargement de l'historique recent...";
             statutVisites.textContent = "Lecture";
@@ -410,9 +396,7 @@
                 const limiteHistorique = Number(statistiques?.historiqueLimite) || NOMBRE_JOURS_HISTORIQUE_PAR_DEFAUT;
 
                 compteurVisiteurs.textContent = formaterNombre(statistiques.jourActuel.visiteursUniquesEstimes);
-                compteurVisites.textContent = formaterNombre(statistiques.jourActuel.visitesTotales);
                 compteurVisiteursHier.textContent = formaterNombre(statistiquesHier?.visiteursUniquesEstimes || 0);
-                compteurVisitesHier.textContent = formaterNombre(statistiquesHier?.visitesTotales || 0);
                 afficherHistoriqueJournalier(statistiques);
                 resumeHistoriqueVisites.textContent = historique.length
                     ? "Historique recent limite a " + limiteHistorique + " jours pour eviter que la liste et le stockage grossissent."
