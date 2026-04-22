@@ -1,9 +1,9 @@
 {
-  "visitesTotales": 35,
+  "visitesTotales": 36,
   "visiteursUniquesEstimes": 22,
-  "derniereVisite": "2026-04-22T05:37:23.829Z",
+  "derniereVisite": "2026-04-22T17:35:22.478Z",
   "visiteurs": {
-    "9a8b0ed55d693eeee0412aecbbf3ddfdff374473525a40fb765dcf2f56a9806c": "2026-04-22T05:37:23.829Z",
+    "9a8b0ed55d693eeee0412aecbbf3ddfdff374473525a40fb765dcf2f56a9806c": "2026-04-22T17:35:22.478Z",
     "de94e23121fceba05ed56bdd0fa90cb16333ad3a161782b183eea659f0f64512": "2026-04-19T05:51:41.919Z",
     "c082b9dff621a4350821ce345eb0ebb0f9268c02e8df27cb9fd126d39461401c": "2026-04-19T08:49:15.011Z",
     "f90bc648c1ccce4cdf708e11557425b6b1675a4c5e3d7fc5d61b4ac1ea54d580": "2026-04-19T21:54:58.131Z",
@@ -28,10 +28,10 @@
   },
   "jours": {
     "2026-04-22": {
-      "visitesTotales": 1,
+      "visitesTotales": 2,
       "visiteursUniquesEstimes": 1,
       "visiteurs": {
-        "9a8b0ed55d693eeee0412aecbbf3ddfdff374473525a40fb765dcf2f56a9806c": "2026-04-22T05:37:23.829Z"
+        "9a8b0ed55d693eeee0412aecbbf3ddfdff374473525a40fb765dcf2f56a9806c": "2026-04-22T17:35:22.478Z"
       }
     },
     "2026-04-19": {
