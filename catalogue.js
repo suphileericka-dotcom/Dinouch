@@ -5,8 +5,6 @@
     const ANCIENNE_CLE_PANIER = "monPanier";
     const CLE_SESSION_ADMIN = "dinouch_session_admin";
     const ANCIENNE_CLE_SESSION_ADMIN = "atelier_admin_session";
-    const CLE_VISITEUR_SITE = "dinouch_site_visitor";
-    const CLE_SESSION_VISITE = "dinouch_site_visit_session";
     const PRODUITS_PAR_PAGE = 15;
 
     let catalogueEnMemoire = null;
@@ -18,7 +16,6 @@
         message: ""
     };
     let sessionAdminMemoire = null;
-    let identifiantVisiteurMemoire = null;
 
     function lireJson(cle, valeurParDefaut) {
         try {
@@ -599,73 +596,17 @@
         enregistrerPanier([]);
     }
 
-    function lireOuCreerIdentifiantVisiteur() {
-        const creerNouvelIdentifiant = () => typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
-            ? crypto.randomUUID()
-            : `dinouch-${Date.now()}-${Math.random().toString(16).slice(2)}`;
-
-        try {
-            const identifiantExistant = localStorage.getItem(CLE_VISITEUR_SITE);
-
-            if (identifiantExistant) {
-                return identifiantExistant;
-            }
-
-            const nouvelIdentifiant = creerNouvelIdentifiant();
-            localStorage.setItem(CLE_VISITEUR_SITE, nouvelIdentifiant);
-            return nouvelIdentifiant;
-        } catch (erreur) {
-            if (!identifiantVisiteurMemoire) {
-                identifiantVisiteurMemoire = creerNouvelIdentifiant();
-            }
-
-            return identifiantVisiteurMemoire;
-        }
-    }
-
     async function enregistrerVisiteSite() {
-        try {
-            if (sessionStorage.getItem(CLE_SESSION_VISITE) === "done") {
-                return null;
-            }
-
-            sessionStorage.setItem(CLE_SESSION_VISITE, "done");
-        } catch (erreur) {
-            return null;
-        }
-
-        try {
-            const donnees = await lireJsonApi("/api/site-views", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json; charset=utf-8"
-                },
-                body: JSON.stringify({
-                    visitorId: lireOuCreerIdentifiantVisiteur()
-                })
-            });
-
-            return normaliserStatistiquesSite(donnees.statistiques || {});
-        } catch (erreur) {
-            try {
-                sessionStorage.removeItem(CLE_SESSION_VISITE);
-            } catch (erreurSession) {
-                return null;
-            }
-
-            return null;
-        }
+        return null;
     }
 
     async function lireStatistiquesSite() {
-        const donnees = await lireJsonApi("/api/site-views");
-
         return {
-            statistiques: normaliserStatistiquesSite(donnees.statistiques || {}),
-            shared: Boolean(donnees.shared),
-            writable: Boolean(donnees.writable),
-            storage: String(donnees.storage || "remote"),
-            message: String(donnees.message || "")
+            statistiques: normaliserStatistiquesSite({}),
+            shared: false,
+            writable: false,
+            storage: "disabled",
+            message: "Le compteur de visites a ete retire pour stabiliser l'hebergement."
         };
     }
 
@@ -765,9 +706,4 @@
         fermerSessionAdmin
     };
 
-    const pageActuelle = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
-
-    if (!["admin.html", "admin_login.html"].includes(pageActuelle)) {
-        enregistrerVisiteSite().catch(() => null);
-    }
 })();

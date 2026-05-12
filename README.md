@@ -29,11 +29,9 @@ Maintenant :
 - `catalogue.js` : logique front commune
 - `api/admin-auth.mjs` : session admin HTTP-only
 - `api/catalogue.mjs` : lecture et ecriture du catalogue partage
-- `api/site-views.mjs` : comptage des visites du site
 - `lib/dinouch-auth.mjs` : signature/verif de session admin
 - `lib/dinouch-storage.mjs` : lecture/ecriture du catalogue
 - `data/catalogue.json` : catalogue partage de base
-- `data/site-stats.json` : statistiques de visites partagees
 
 ## Fonctionnement
 
@@ -48,15 +46,11 @@ Dans les deux cas, tous les appareils lisent la meme base de catalogue.
 
 ### Statistiques de visites
 
-Quand un visiteur ouvre une page publique du site :
+Le compteur de visites a ete retire pour stabiliser l'hebergement.
 
-- le navigateur recoit un identifiant local
-- `POST /api/site-views` enregistre une visite pour la session en cours
-- l'API ignore les robots les plus courants et limite le comptage a une visite par navigateur et par heure
-- l'admin affiche surtout les chiffres du jour et un recap des derniers jours pour eviter la confusion avec le cumul
-- l'admin peut consulter les chiffres dans `admin.html`
-
-Les "visiteurs estimes" representent des navigateurs uniques, pas des personnes verifiees avec certitude.
+- aucune ouverture de page publique n'ecrit encore dans GitHub
+- `/api/site-views` repond maintenant en mode desactive
+- l'admin n'affiche plus de tableau de frequentation
 
 ### Publication admin
 
@@ -99,7 +93,6 @@ Variables optionnelles :
 - `GITHUB_REPO_NAME`
 - `GITHUB_REPO_BRANCH`
 - `GITHUB_CATALOGUE_PATH`
-- `GITHUB_SITE_STATS_PATH`
 
 Par defaut, le projet utilise :
 
@@ -111,9 +104,8 @@ Par defaut, le projet utilise :
 ## Important
 
 - Sans `GITHUB_TOKEN`, le catalogue reste lisible partout mais l'admin ne peut pas publier de facon partagee.
-- Sans `GITHUB_TOKEN`, le compteur de visites ne peut pas s'actualiser pour tout le monde.
 - Le panier reste volontairement local a chaque navigateur.
-- Les vues n'ont plus ete gardees dans l'interface, car ce n'etait pas une information fiable entre appareils.
+- Le compteur de visites a ete retire pour eviter les commits et redeploiements automatiques lies a la frequentation.
 
 ## Deploiement
 
