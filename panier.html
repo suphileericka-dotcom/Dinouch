@@ -3,19 +3,20 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600;1,700&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="theme.css"/>
     <link rel="stylesheet" href="panier.css"/>
     <script src="catalogue.js"></script>
     <title>DINOUCH | Panier</title>
 </head>
-<body class="bg-[#fcf9f6]">
+<body class="dinouch-theme">
 
-    <header class="sticky top-0 z-50 flex items-center justify-between border-b border-gray-100 bg-[#fcf9f6]/90 px-6 py-4 backdrop-blur-sm">
-        <a href="index.html" class="material-symbols-outlined cursor-pointer text-[#615e5c]">arrow_back</a>
-        <h1 class="font-headline text-2xl font-black italic text-[#615e5c]">DINOUCH</h1>
-        <a href="admin.html" class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 text-[#615e5c]">
+    <header class="site-header sticky top-0 z-50 flex items-center justify-between px-6 py-4">
+        <a href="index.html" class="circle-button material-symbols-outlined flex h-10 w-10 items-center justify-center rounded-full">arrow_back</a>
+        <h1 class="brand-logo font-headline text-2xl font-black">DINOUCH</h1>
+        <a href="admin.html" class="circle-button flex h-10 w-10 items-center justify-center rounded-full">
             <span class="material-symbols-outlined text-base">person</span>
         </a>
     </header>
@@ -23,9 +24,9 @@
     <main class="mx-auto max-w-4xl px-6 py-8">
         <div class="grid grid-cols-1 gap-10 lg:grid-cols-2">
             <section class="space-y-6">
-                <h2 class="font-headline text-3xl font-black">Votre <span class="italic text-[#705b44]">selection</span></h2>
+                <h2 class="font-headline text-3xl font-black">Votre <span class="theme-accent italic">selection</span></h2>
 
-                <div id="message-panier-vide" class="rounded-2xl border border-gray-50 bg-white p-6 text-sm text-[#8d8882] shadow-sm">
+                <div id="message-panier-vide" class="theme-empty rounded-2xl p-6 text-sm shadow-sm">
                     Votre panier est vide pour le moment.
                 </div>
 
@@ -37,40 +38,40 @@
                 </div>
 
                 <div class="space-y-3">
-                    <button id="bouton-partage-panier" type="button" class="flex w-full items-center justify-center gap-2 rounded-xl border border-[#d8cec1] bg-white py-4 font-bold text-[#705b44] transition-all hover:bg-[#fcf4eb]">
+                    <button id="bouton-partage-panier" type="button" class="soft-button flex w-full items-center justify-center gap-2 rounded-xl py-4 font-bold transition-all">
                         <span class="material-symbols-outlined">share</span>
                         Partager mon panier
                     </button>
-                    <p id="message-partage-panier" class="text-xs leading-5 text-[#8d8882]">
+                    <p id="message-partage-panier" class="theme-muted text-xs leading-5">
                         Partagez un lien avec apercu de l'image du premier article sur WhatsApp.
                     </p>
                 </div>
             </section>
 
-            <section class="checkout-section rounded-2xl border border-gray-50 bg-white p-6 shadow-sm">
+            <section class="checkout-section rounded-2xl p-6 shadow-sm">
                 <h3 class="font-headline mb-1 text-2xl font-bold">Finaliser la commande</h3>
-                <p class="mb-8 text-xs font-light text-gray-500">Completez ce formulaire pour envoyer votre panier par email.</p>
+                <p class="theme-muted mb-8 text-xs font-light">Completez ce formulaire pour envoyer votre panier par email.</p>
 
                 <form id="formulaire-commande" action="https://formspree.io/f/xaqljyjd" method="POST">
                     <div class="mb-4">
-                        <label class="text-[10px] font-bold uppercase text-gray-400">Nom et prenom</label>
-                        <input type="text" name="nom_client" class="custom-input mt-1 w-full rounded-lg border-none bg-gray-50 p-3 focus:ring-1 focus:ring-black" placeholder="Ex : Julienne Moreau" required>
+                        <label class="theme-muted text-[10px] font-bold uppercase">Nom et prenom</label>
+                        <input type="text" name="nom_client" class="theme-input custom-input mt-1 w-full rounded-lg p-3" placeholder="Ex : Julienne Moreau" required>
                     </div>
                     <div class="mb-4">
-                        <label class="text-[10px] font-bold uppercase text-gray-400">Telephone ou WhatsApp</label>
-                        <input type="tel" name="telephone_client" class="custom-input mt-1 w-full rounded-lg border-none bg-gray-50 p-3 focus:ring-1 focus:ring-black" placeholder="+33 6 00 00 00 00" required>
+                        <label class="theme-muted text-[10px] font-bold uppercase">Telephone ou WhatsApp</label>
+                        <input type="tel" name="telephone_client" class="theme-input custom-input mt-1 w-full rounded-lg p-3" placeholder="+33 6 00 00 00 00" required>
                     </div>
 
                     <input id="champ-produits" type="hidden" name="produits_choisis" value="">
 
-                    <button id="bouton-envoi" type="submit" class="btn-submit-order flex w-full items-center justify-center gap-2 rounded-xl bg-black py-4 font-bold text-white transition-all hover:bg-gray-800">
+                    <button id="bouton-envoi" type="submit" class="btn-submit-order glitter-button flex w-full items-center justify-center gap-2 rounded-xl py-4 font-bold text-white transition-all">
                         Envoyer ma commande
                         <span class="material-symbols-outlined">send</span>
                     </button>
                 </form>
 
                 <div class="mt-8 text-center">
-                    <a href="index.html" class="flex items-center justify-center gap-2 text-[10px] font-bold uppercase text-gray-400 hover:text-black">
+                    <a href="index.html" class="theme-muted flex items-center justify-center gap-2 text-[10px] font-bold uppercase">
                         <span class="material-symbols-outlined text-sm">arrow_back</span>
                         Retour a la boutique
                     </a>
@@ -79,11 +80,11 @@
         </div>
     </main>
 
-    <nav class="fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 gap-10 rounded-full border border-white/20 bg-white/80 px-8 py-3 shadow-2xl backdrop-blur-lg lg:hidden">
-        <a href="index.html" class="text-gray-300"><span class="material-symbols-outlined">home</span></a>
-        <a href="suggestions.html" class="text-gray-300"><span class="material-symbols-outlined">chat</span></a>
-        <a href="panier.html" class="text-[#705b44]"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_bag</span></a>
-        <a href="admin.html" class="text-gray-300"><span class="material-symbols-outlined">person</span></a>
+    <nav class="site-nav fixed bottom-6 left-1/2 z-50 flex -translate-x-1/2 gap-10 rounded-full px-8 py-3 lg:hidden">
+        <a href="index.html"><span class="material-symbols-outlined">home</span></a>
+        <a href="suggestions.html"><span class="material-symbols-outlined">chat</span></a>
+        <a href="panier.html" class="active"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_bag</span></a>
+        <a href="admin.html"><span class="material-symbols-outlined">person</span></a>
     </nav>
 
     <script>
@@ -184,15 +185,15 @@
                     : '<div class="img-placeholder flex h-24 w-20 items-center justify-center rounded bg-gray-100 text-[10px] text-gray-400">PHOTO</div>';
 
                 return `
-                    <div class="cart-card flex gap-4 rounded-xl border border-gray-50 bg-white p-4 shadow-sm">
+                    <div class="cart-card flex gap-4 rounded-xl p-4 shadow-sm">
                         ${image}
                         <div class="flex-1">
                             <div class="flex items-start justify-between gap-3">
                                 <h3 class="font-headline font-bold">${window.DINOUCH.echapperTexte(produit.nom)}</h3>
                                 <span class="font-bold">${window.DINOUCH.formaterPrix(produit.prix)}</span>
                             </div>
-                            <p class="mt-1 text-[10px] uppercase tracking-widest text-gray-500">Taille : ${window.DINOUCH.echapperTexte(produit.taille || "Unique")}</p>
-                            <button type="button" data-index-panier="${index}" class="mt-3 flex items-center gap-1 text-[9px] font-black uppercase text-red-500">
+                            <p class="theme-muted mt-1 text-[10px] uppercase tracking-widest">Taille : ${window.DINOUCH.echapperTexte(produit.taille || "Unique")}</p>
+                            <button type="button" data-index-panier="${index}" class="theme-accent mt-3 flex items-center gap-1 text-[9px] font-black uppercase">
                                 <span class="material-symbols-outlined text-sm">delete</span> Supprimer
                             </button>
                         </div>
