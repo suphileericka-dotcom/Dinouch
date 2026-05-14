@@ -223,6 +223,11 @@
                 return;
             }
 
+            if (statut.message) {
+                statutSynchronisation.textContent = statut.message;
+                return;
+            }
+
             if (statut.shared) {
                 statutSynchronisation.textContent = "Lecture partagee active : les articles deja en ligne restent visibles partout, mais les nouveaux articles ne seront pas sauvegardes tant que GITHUB_TOKEN n'est pas ajoute sur Vercel.";
                 return;

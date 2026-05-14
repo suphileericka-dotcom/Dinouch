@@ -229,10 +229,6 @@
     }
 
     function lireMessagePublicationIndisponible() {
-        if (statutStockage.shared) {
-            return "La photo peut etre envoyee sur Cloudinary, mais l'article ne sera pas enregistre sur le catalogue partage tant que GITHUB_TOKEN n'est pas ajoute sur Vercel.";
-        }
-
         return statutStockage.message || "Le catalogue partage n'est pas disponible pour le moment.";
     }
 
