@@ -1,5 +1,17 @@
 [
   {
+    "id": "dinouch-1779416041664",
+    "nom": "mayo de bain",
+    "prix": 788,
+    "image": "https://res.cloudinary.com/dues52ox5/image/upload/v1779416028/kwcsnqc2up5gosv7nraz.jpg",
+    "tailles": [
+      "S"
+    ],
+    "vues": 0,
+    "description": "Une nouvelle piece ajoutee a la boutique DINOUCH.",
+    "estExemple": false
+  },
+  {
     "id": "dinouch-1779415916834",
     "nom": "mayo de bain",
     "prix": 788,
